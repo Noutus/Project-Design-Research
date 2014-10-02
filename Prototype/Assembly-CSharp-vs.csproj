@@ -48,6 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BatMovement.cs" />
      <Compile Include="Assets\Scripts\BatMovement2.cs" />
+     <Compile Include="Assets\Scripts\Echolocation\EcholocationCircle.cs" />
+     <Compile Include="Assets\Scripts\Echolocation\EcholocationCone.cs" />
+     <Compile Include="Assets\Scripts\Echolocation\EcholocationConeActivated.cs" />
+     <Compile Include="Assets\Scripts\Helpers\Vector2Helper.cs" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Radar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

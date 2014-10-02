@@ -1,69 +1,63 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BatMovement2 : MonoBehaviour {
-
+public class Movement : MonoBehaviour
+{
 	private bool upPressed;
 	private bool downPressed;
 	private bool leftPressed;
 	private bool rightPressed;
 
-	public GameObject radar;
+	private float maxSpeed;
+	private float maxTurn;
 
-	// Use this for initialization
-	void Start () {
-
-
+	void Start()
+	{
 		upPressed = false;
 		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
+
+		maxSpeed = 10f;
+		maxTurn = 100f;
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		if (Input.GetKeyDown(KeyCode.W))
 			upPressed = true;
-		
+
 		if (Input.GetKeyDown(KeyCode.S))
 			downPressed = true;
-		
+
 		if (Input.GetKeyDown(KeyCode.A))
 			leftPressed = true;
-		
+
 		if (Input.GetKeyDown(KeyCode.D))
 			rightPressed = true;
 		
 		if (Input.GetKeyUp(KeyCode.W))
 			upPressed = false;
-		
+
 		if (Input.GetKeyUp(KeyCode.S))
 			downPressed = false;
-		
+
 		if (Input.GetKeyUp(KeyCode.A))
 			leftPressed = false;
-		
+
 		if (Input.GetKeyUp(KeyCode.D))
 			rightPressed = false;
-		
+
 		if (upPressed)
-			transform.position += Vector3.up * Time.deltaTime * 4;
-		
+			transform.position += transform.up * Time.deltaTime * maxSpeed;
+
 		if (downPressed)
-			transform.position += Vector3.down * Time.deltaTime * 4;
-		
+			transform.position -= transform.up * Time.deltaTime * maxSpeed;
+
 		if (leftPressed)
-			transform.position += Vector3.left * Time.deltaTime * 4;
-		
+			transform.Rotate(Vector3.forward, maxTurn * Time.deltaTime);
+
 		if (rightPressed)
-			transform.position += Vector3.right * Time.deltaTime * 4;
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-
-			//radar.transform.position = this.transform.position;
-
-			//Debug.Log(radar.GetComponent<Radar>().numberOfPossiblePoints);
-		}
+			transform.Rotate(Vector3.forward, -maxTurn * Time.deltaTime);
 	}
 }

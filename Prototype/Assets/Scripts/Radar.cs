@@ -7,13 +7,13 @@ public class Radar : MonoBehaviour {
 	
 	public GameObject SoundPrefab;
 	public int maxNumberPoints;
-	private GameObject[maxNumberPoints] SoundVector;
+	//private GameObject SoundVector;
 
 
 	// Use this for initialization
 	void Start () {
 		maxNumberPoints = 6;
-		SoundVector=(GameObject) GameObject.Instantiate(SoundPrefab);
+		//SoundVector=(GameObject) GameObject.Instantiate(SoundPrefab);
 
 	}
 	
