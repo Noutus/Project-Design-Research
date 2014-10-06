@@ -14,6 +14,7 @@ public class BatMovement : MonoBehaviour
 		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
+//hello
 	}
 	
 	void Update()
