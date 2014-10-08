@@ -25,28 +25,42 @@ public class EcholocationCone : MonoBehaviour
 	
 	void Update()
 	{
-		RaycastHit2D[] hits = new RaycastHit2D[nrOfSounds];
+		RaycastHit[] hits = new RaycastHit[nrOfSounds];
 
 		for (int i = 0; i < hits.Length; i++)
 		{
 			// Calculate the direction of the raycast.
+			float rayDistance=1f;
+			bool aux=true;
 			Vector2 direction = transform.up;
 			direction = Vector2Helper.Rotate(direction, 10 * (i - (nrOfSounds - 1) / 2));
 
 			// Raycast all the way and only return the walls as a hit.
-			RaycastHit2D[] firstHits = Physics2D.RaycastAll(transform.position, direction);
-			for (int j = 0; j < firstHits.Length; j++)
+			while(rayDistance<100f && aux){
+
+				RaycastHit[] firstHits = Physics.RaycastAll(transform.position, direction,rayDistance);
+				rayDistance=rayDistance+1;
+			
+			for (int j = 0; j < firstHits.Length && aux==true; j++)
 			{
 				if (firstHits[j].transform.tag == "Wall")
 				{
 					hits[i] = firstHits[j];
-					break;
-				}
-			}
+						Vector3 hitPosition = new Vector3(hits[i].point.x, hits[i].point.y);
+						collisions[i].transform.position = hitPosition;
+						aux=false;
+						rayDistance=1f;
+					}else{
+						collisions[i].transform.position=hiddenPosition;
+
+					}	
+					
+					
 
 			// Set position of the sound to the raycasthit position.
-			Vector3 hitPosition = new Vector3(hits[i].point.x, hits[i].point.y);
-			collisions[i].transform.position = hitPosition;
+			
 		}
 	}
+}
+}
 }
