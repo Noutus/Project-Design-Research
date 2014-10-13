@@ -17,28 +17,29 @@ public class Melody : MonoBehaviour
 	void Update()
 	{
 		Vector2 direction = Vector2.up;
-		RaycastHit2D hitFinal = new RaycastHit2D();
+		RaycastHit hitFinal = new RaycastHit();
 
 		for (int i = 0; i < maxIterations; i++)
 		{
 			direction = Vector2Helper.Rotate(direction, 360 / maxIterations);
 
-			RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 10, 1<<8);
-
-			if (hit.collider != null)
+			RaycastHit[] hit = Physics.RaycastAll(transform.position, direction, 10, 1<<8);
+			if(hit.Length>0){
+			if (hit[0].collider != null)
 			{
 				if (i == 0)
 				{
-					hitFinal = hit;
+					hitFinal = hit[0];
 				}
 
 				else 
 				{
-					if (Vector3.Distance(transform.position, hit.point) < Vector3.Distance(transform.position, hitFinal.point))
+					if (Vector3.Distance(transform.position, hit[0].point) < Vector3.Distance(transform.position, hitFinal.point))
 				    {
-						hitFinal = hit;
+						hitFinal = hit[0];
 					}
 				}
+			}
 			}
 		}
 
