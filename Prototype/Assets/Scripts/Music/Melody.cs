@@ -9,16 +9,26 @@ public class Melody : MonoBehaviour
 
 	private static int maxIterations = 32;
 
-	void Start()
+
+
+
+	void Awake()
 	{
-		melody = (GameObject) GameObject.Instantiate(melodyPrefab);
+		melody = (GameObject) GameObject.Instantiate(melodyPrefab); 
 	}
-	
+
+
+
 	void Update()
 	{
+
+		//first let's check whether the player it is actually over the line
+		//in that case we place the melody in its position 
+
+
 		Vector2 direction = Vector2.up;
 		RaycastHit hitFinal = new RaycastHit();
-
+		bool isInLine = false;
 		for (int i = 0; i < maxIterations; i++)
 		{
 			direction = Vector2Helper.Rotate(direction, 360 / maxIterations);
@@ -30,6 +40,11 @@ public class Melody : MonoBehaviour
 				if (i == 0)
 				{
 					hitFinal = hit[0];
+						/*if(Vector3.Distance(transform.position, hitFinal.point)<0.9f){
+
+							isInLine=true;
+						}*/
+						    
 				}
 
 				else 
@@ -38,11 +53,23 @@ public class Melody : MonoBehaviour
 				    {
 						hitFinal = hit[0];
 					}
+						/*if(Vector3.Distance(transform.position, hitFinal.point)<0.9f){
+
+							isInLine=true;
+						}*/
 				}
 			}
 			}
 		}
+		// (isInLine) {
+		//	melody.transform.position = transform.position;
+		//} else {
+			melody.transform.position = hitFinal.point;
+		//}
 
-		melody.transform.position = hitFinal.point;
+
+
+
+
 	}
 }

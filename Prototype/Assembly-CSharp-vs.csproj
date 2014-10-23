@@ -51,9 +51,11 @@
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCircle.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCone.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationConeActivated.cs" />
+     <Compile Include="Assets\Scripts\EndingGame.cs" />
      <Compile Include="Assets\Scripts\Helpers\Vector2Helper.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Music\Melody.cs" />
+     <Compile Include="Assets\Scripts\MusicSystem.cs" />
      <Compile Include="Assets\Scripts\Radar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
