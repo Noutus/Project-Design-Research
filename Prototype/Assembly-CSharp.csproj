@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Applications/Unity4.5/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Applications/Unity4.5/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +51,9 @@
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCircle.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCone.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationConeActivated.cs" />
+     <Compile Include="Assets\Scripts\EndingGame.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\GUI\MenuItemScript.cs" />
-     <Compile Include="Assets\Scripts\EndingGame.cs" />
      <Compile Include="Assets\Scripts\Helpers\Vector2Helper.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Music\Melody.cs" />
