@@ -51,9 +51,9 @@
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCircle.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCone.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationConeActivated.cs" />
+     <Compile Include="Assets\Scripts\EndingGame.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\GUI\MenuItemScript.cs" />
-     <Compile Include="Assets\Scripts\EndingGame.cs" />
      <Compile Include="Assets\Scripts\Helpers\Vector2Helper.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Music\Melody.cs" />

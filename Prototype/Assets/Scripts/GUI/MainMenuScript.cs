@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class MainMenuScript : MonoBehaviour
 	private float t;
 	private float startHeight;
 	private Rect startPosition;
+	
+	public string[] menuItemNames;
+	public string[] menuItemRefs;
 
 	public GUIStyle activeStyle;
 	public GUIStyle passiveStyle;
@@ -19,7 +23,7 @@ public class MainMenuScript : MonoBehaviour
 		up = false;
 		t = 1;
 		startHeight = Screen.height / 2;
-		startPosition = new Rect(Screen.width / 2, startHeight, 100, 50);
+		startPosition = new Rect(0, startHeight, Screen.width, 50);
 
 		Initialize();
 	}
@@ -42,9 +46,12 @@ public class MainMenuScript : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
-			if (activeItem.name == "Play")
+			for (int i = 0; i < menuItemNames.Length; i++)
 			{
-				Application.LoadLevel("Test Echolocation");
+				if (activeItem.name == menuItemNames[i])
+				{
+					Application.LoadLevel(menuItemRefs[i]);
+				}
 			}
 		}
 
@@ -57,7 +64,7 @@ public class MainMenuScript : MonoBehaviour
 		else
 			startHeight = Mathf.Lerp(Screen.height / 2 + startPosition.height * 1.2f, Screen.height / 2, t);
 
-		startPosition = new Rect(0, startHeight, Screen.width / 2, 50);
+		startPosition = new Rect(0, startHeight, Screen.width, 50);
 	}
 
 	void OnGUI()
@@ -101,8 +108,6 @@ public class MainMenuScript : MonoBehaviour
 
 	private void Initialize()
 	{
-		string[] menuItemNames = new string[] {"Play", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8"};
-
 		menuItems = new MenuItemScript[menuItemNames.Length];
 
 		for (int i = 0; i < menuItemNames.Length; i++)

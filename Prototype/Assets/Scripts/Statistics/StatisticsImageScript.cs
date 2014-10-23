@@ -8,7 +8,7 @@ using System.IO;
 public class StatisticsImageScript : MonoBehaviour
 {
 	// Scale between the World and Image.
-	protected static int scale = 7;
+	protected static float scale = 7;
 
 	// Texture on which the statistics are saved.
 	public Texture2D texture;
@@ -23,7 +23,7 @@ public class StatisticsImageScript : MonoBehaviour
 	public virtual void Initialize()
 	{
 		// Texture2D is created.
-		texture = new Texture2D(100 * scale, 100 * scale);
+		texture = new Texture2D(Mathf.FloorToInt(100 * scale), Mathf.FloorToInt(100 * scale));
 
 		// 
 		StartCoroutine("PrintLevel");
