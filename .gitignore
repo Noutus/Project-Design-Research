@@ -53,6 +53,18 @@ Prototype/Assembly-CSharp.csproj
 Prototype/Assembly-CSharp-vs.csproj
 Prototype/Assembly-CSharp.csproj
 Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll
+<<<<<<< HEAD
 Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
 Prototype/Assembly-CSharp-vs.csproj
 Prototype/Assembly-CSharp.csproj
+=======
+Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll
+Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll
+Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll
+>>>>>>> origin/master
+
+Prototype/Library/assetDatabase3
+Prototype/Library/expandedItems
+Prototype/Library/InspectorExpandedItems.asset
+Prototype/Library/ScriptAssemblies/Assembly-CSharp.dll
+Prototype/ProjectSettings/EditorBuildSettings.asset
