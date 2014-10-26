@@ -44,6 +44,9 @@ public class EcholocationCone : MonoBehaviour
 
 
 	void pauseMainMelody(){
+		//TODO: here is the problem, the thing is that it takes the reference for every AudioSource (that's why it is able to show 
+		//its name in the Debug.Log BUT the sentence to stop it " e.audio.Pause (); " only works with the first one (the piano) 
+		//WHY??????????????????????
 		foreach (AudioSource e in melody) {
 			if(e.isPlaying){
 				e.audio.Pause ();
@@ -127,18 +130,21 @@ public class EcholocationCone : MonoBehaviour
 
 		//Debug.Log ("minimum distance " +playerWallDistance);
 		if(playerWallDistance < 3f){
-			//Debug.Log("weeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
 			pauseMainMelody();
-			//if (reference != lastreference && !firstTime) {
-			//	lastreference.GetComponent<MusicSystem>().check=false;
-			//}
+			if (reference != lastreference && !firstTime) {
+				//Debug.Log ("isnottt");
+				lastreference.GetComponent<MusicSystem>().check=false;
+			}
 			lastreference=reference;
 			wallLoop.GetComponent<MusicSystem>().collision=reference;
 			wallLoop.GetComponent<MusicSystem>().check=true;
 
 		}else{
-
-			reference.GetComponent<MusicSystem>().check=false;
+			//Debug.Log("weeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+			//lastreference.GetComponent<MusicSystem>().check=false;
+			//reference.GetComponent<MusicSystem>().check=false;
+			wallLoop.GetComponent<MusicSystem>().check=false;
 			playMainMelody();
 		}
 }
