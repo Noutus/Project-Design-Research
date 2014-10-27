@@ -22,7 +22,7 @@ public class MusicSystem : MonoBehaviour {
 		looper = audios [1];
 		looperhelper = audios [3].audio;
 		melody = (AudioSource[])GameObject.Find ("Melody(Clone)").GetComponents<AudioSource>();
-		//sampling=1/melody[0].clip.frequency;
+		sampling=1/melody[0].clip.frequency;
 	}
 
 	void pauseMainMelody(){
@@ -54,10 +54,6 @@ public class MusicSystem : MonoBehaviour {
 
 	void Update () {
 
-
-
-
-
 		//Before performing any unnecesary calculations we check whether the player is closer enough
 
 		if (check) {
@@ -69,9 +65,9 @@ public class MusicSystem : MonoBehaviour {
 			transform.position = collision.transform.position; //go to the closest position
 			
 			aux = melody[0].time;
-
+			Debug.Log("The main melody is on the time :" + aux+ " secs" );
 			
-			//Debug.Log ("timeeeeeeeeee" +aux);
+		   
 			
 			helper = 0f;
 			if (aux < 28.8f)
@@ -83,7 +79,7 @@ public class MusicSystem : MonoBehaviour {
 
 
 			if (isInPause) {
-				Debug.Log ("kkkkkkkkkkkk");
+				Debug.Log ("ISINPAUSE");
 				looper = audios [0].audio;
 				helper = 0;
 			} else {
@@ -94,7 +90,6 @@ public class MusicSystem : MonoBehaviour {
 
 					looper = audios [0];
 
-				Debug.Log("num1");
 				}
 				else if ((helper >= 1.8 && helper < 3.6) || (helper >= 9 && helper < 10.8) || (helper >= 19.8 && helper < 21.6)
 				         || (helper >= 27.0 && helper < 28.8) || (helper >= 34.2 && helper < 36.0) || (helper >= 41.4 && helper < 43.2) 
@@ -106,7 +101,7 @@ public class MusicSystem : MonoBehaviour {
 				         || (helper >= 54.0 && helper < 55.8) || (helper >= 61.2 && helper < 63.0) || (helper >= 68.4 && helper < 70.2)
 				         || (helper >= 75.6 && helper < 77.4) || (helper >= 82.8 && helper < 84.6) || (helper >= 90.0 && helper < 91.8)){
 					looper = audios [2];
-					Debug.Log("num2");
+
 					}
 				else if ((helper >= 5.4 && helper < 6.3) || (helper >= 12.6 && helper < 13.5) || (helper >= 23.4 && helper < 24.3)
 				         || (helper >= 30.6 && helper < 31.5) || (helper >= 37.8 && helper < 38.7) || (helper >= 45.0 && helper < 45.9) 
@@ -126,10 +121,11 @@ public class MusicSystem : MonoBehaviour {
 			//}else{
 				//Debug.Log("AWAKEE2");
 				//looperhelper.Stop();
-				if(!looper.isPlaying){
+			if(!looper.isPlaying){
 					looper.Play ();
-					looperhelper=looper;//TODO: when do we change looperhelper?
-				}
+
+					//looperhelper=looper;//TODO: when do we change looperhelper?
+			}
 			//}
 			Debug.Log("this is the actual loop: " + looper.clip.name);
 
@@ -141,8 +137,11 @@ public class MusicSystem : MonoBehaviour {
 			}
 
 
+
 			//playMainMelody();
 		}
+
+
 }
 
 }
