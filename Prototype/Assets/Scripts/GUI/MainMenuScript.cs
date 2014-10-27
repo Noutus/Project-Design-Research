@@ -4,40 +4,56 @@ using System.Collections.Generic;
 
 public class MainMenuScript : MonoBehaviour
 {
-	private bool up;
-	private float t;
-	private float startHeight;
-	private Rect startPosition;
+	protected bool up;
+	protected float t;
+	protected float startHeight;
+	protected Rect startPosition;
 	
 	public string[] menuItemNames;
 	public string[] menuItemRefs;
+	public bool[] menuItemLocks;
 
 	public GUIStyle activeStyle;
 	public GUIStyle passiveStyle;
+	public GUIStyle lockedStyle;
 
 	private MenuItemScript[] menuItems;
-	private MenuItemScript activeItem;
+	protected MenuItemScript[] MenuItems
+	{
+		get { return menuItems; }
+		set { menuItems = value; }
+	}
 
-	void Start()
+	private MenuItemScript activeItem;
+	protected MenuItemScript ActiveItem
+	{
+		get {return activeItem; }
+		set {activeItem = value; }
+	}
+
+	void Awake()
 	{
 		up = false;
 		t = 1;
 		startHeight = Screen.height / 2;
 		startPosition = new Rect(0, startHeight, Screen.width, 50);
+	}
 
+	void Start()
+	{
 		Initialize();
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.UpArrow))
+		if (Input.GetKeyDown(KeyCode.UpArrow) && activeItem != menuItems[0])
 		{
 			activeItem = activeItem.previous;
 			up = true;
 			t = 0;
 		}
 
-		if (Input.GetKeyDown(KeyCode.DownArrow))
+		if (Input.GetKeyDown(KeyCode.DownArrow) && activeItem != menuItems[menuItems.Length - 1])
 		{
 			activeItem = activeItem.next;
 			up = false;
@@ -79,7 +95,14 @@ public class MainMenuScript : MonoBehaviour
 			{
 				Rect nextPosition = position;
 				nextPosition.y += startPosition.height * i * 1.2f;
-				GUI.TextArea(nextPosition, menuItems[i].name, passiveStyle);
+				if (menuItems[i].locked)
+				{
+					GUI.TextArea(nextPosition, menuItems[i].name, lockedStyle);
+				}
+				else
+				{
+					GUI.TextArea(nextPosition, menuItems[i].name, passiveStyle);
+				}
 			}
 
 			else
@@ -91,10 +114,24 @@ public class MainMenuScript : MonoBehaviour
 					{
 						previous = (MenuItemScript) previousItems.Pop();
 						position.y -= 1.2f * startPosition.height;
-						GUI.TextArea(position, previous.name, passiveStyle);
+						if (previous.locked)
+						{
+							GUI.TextArea(position, previous.name, lockedStyle);
+						}
+						else
+						{
+							GUI.TextArea(position, previous.name, passiveStyle);
+						}
 					}
 
-					GUI.TextArea(startPosition, activeItem.name, activeStyle);
+					if (activeItem.locked)
+					{
+						GUI.TextArea(startPosition, activeItem.name, lockedStyle);
+					}
+					else
+					{
+						GUI.TextArea(startPosition, activeItem.name, activeStyle);
+					}
 					foundActiveItem = true;
 				}
 
@@ -106,12 +143,15 @@ public class MainMenuScript : MonoBehaviour
 		}
 	}
 
-	private void Initialize()
+	public void Initialize()
 	{
 		menuItems = new MenuItemScript[menuItemNames.Length];
 
 		for (int i = 0; i < menuItemNames.Length; i++)
+		{
 			menuItems[i] = new MenuItemScript(menuItemNames[i]);
+			menuItems[i].locked = menuItemLocks[i];
+		}
 
 		for (int j = 0; j < menuItems.Length; j++)
 		{
