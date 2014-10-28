@@ -38,10 +38,19 @@ public class MusicSystem : MonoBehaviour {
 		if (check) {
 
 			transform.position = collision.transform.position; //go to the closest position
+<<<<<<< HEAD
 			aux = mainMelody.time;
 			//Debug.Log("The main melody is on the time :" + aux+ " secs" );
 
 			// 1. SELECT LOOP
+=======
+			
+			aux = melody[0].time;
+			//Debug.Log("The main melody is on the time :" + aux+ " secs" );
+			
+		   
+			
+>>>>>>> cd80e9e9307cb247fb479bbe80d547b0170938e4
 			helper = 0f;
 			if (aux < 28.8f)
 				helper = aux;
@@ -92,8 +101,13 @@ public class MusicSystem : MonoBehaviour {
 			if(!looper.isPlaying){
 					looper.Play ();
 			}
+<<<<<<< HEAD
 			//Debug.Log("this is the actual loop: " + looper.clip.name);
 
+=======
+			//}
+			//Debug.Log("this is the actual loop: " + looper.clip.name);
+>>>>>>> cd80e9e9307cb247fb479bbe80d547b0170938e4
 
 		} else {
 			//2. PLAY/STOP LOOP

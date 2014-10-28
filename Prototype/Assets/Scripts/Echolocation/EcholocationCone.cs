@@ -48,14 +48,29 @@ public class EcholocationCone : MonoBehaviour
 		//WHY??????????????????????
 		foreach (AudioSource e in melody) {
 			if(e.isPlaying){
+<<<<<<< HEAD
 				e.audio.Pause ();
 				//Debug.Log(i+"Pauseee: " + e.clip.name + " and is playing?: " + e.audio.isPlaying );
+=======
+				e.audio.Pause();
+				//Debug.Log("Pauseee: " + e.clip.name);
+>>>>>>> cd80e9e9307cb247fb479bbe80d547b0170938e4
 			}
 
 		}
 	}
 	
 	void playMainMelody(){
+<<<<<<< HEAD
+=======
+		foreach (AudioSource e in melody) {
+			if(!e.isPlaying){
+				e.audio.Play();
+				//Debug.Log("Playy: " + e.clip.name);
+			}
+		}
+	}
+>>>>>>> cd80e9e9307cb247fb479bbe80d547b0170938e4
 
 		//foreach (AudioSource e in melody) {
 			//if (!e.isPlaying) {
@@ -149,6 +164,11 @@ public class EcholocationCone : MonoBehaviour
 
 		reference.renderer.material.color = Color.red; //this is just to check which collision is closest to the player
 
+<<<<<<< HEAD
+=======
+		//Debug.Log ("minimum distance " +playerWallDistance);
+		if(playerWallDistance < 4f){
+>>>>>>> cd80e9e9307cb247fb479bbe80d547b0170938e4
 
 		//calculation of the angles
 

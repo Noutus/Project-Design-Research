@@ -8,10 +8,11 @@ public class LevelMenuScript : MainMenuScript
 		Initialize();
 
 		int unlocks = (int) GlobalValues.instance.LevelsUnlocked;
+		Debug.Log(unlocks);
 
 		for (int i = 0; i < MenuItems.Length; i++)
 		{
-			if (i < unlocks)
+			if (i <= unlocks)
 			{
 				MenuItems[i].locked = false;
 			}

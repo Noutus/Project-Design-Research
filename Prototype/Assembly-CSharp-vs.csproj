@@ -51,7 +51,7 @@
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCircle.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationCone.cs" />
      <Compile Include="Assets\Scripts\Echolocation\EcholocationConeActivated.cs" />
-     <Compile Include="Assets\Scripts\EndingGame.cs" />
+     <Compile Include="Assets\Scripts\FinishScript.cs" />
      <Compile Include="Assets\Scripts\GUI\ExitMenuScript.cs" />
      <Compile Include="Assets\Scripts\GUI\FirstMenuScript.cs" />
      <Compile Include="Assets\Scripts\GUI\LevelMenuScript.cs" />
