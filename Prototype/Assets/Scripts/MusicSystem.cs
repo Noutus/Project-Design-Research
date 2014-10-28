@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*ATTACHED TO THE "WALLLOOP" GAMEOBJECT
+  PURPOSE:
+ *  1. SELECT LOOP: it selects the corresponding loop sounds according to the time in which the main music it is
+ *  2. PLAY/STOP LOOP: it plays/stops the loop sound
+ * */
+
+
+
 public class MusicSystem : MonoBehaviour {
 
 	public bool check;
 	private float helper;
 	private AudioSource[] audios;
 	private bool isInPause;
-	private AudioSource looper,looperhelper;
-	private AudioSource[] melody;
-	private float aux=1f,sampling;
-	// Use this for initialization
+	private AudioSource looper;
+	private AudioSource mainMelody;
+	private float aux=1f;
 
 	public GameObject collision;
+
 
 	void Start () {
 		audios=(AudioSource[])GetComponents<AudioSource>();
@@ -20,37 +28,8 @@ public class MusicSystem : MonoBehaviour {
 		check = false;
 		helper = 0f;
 		looper = audios [1];
-		looperhelper = audios [3].audio;
-		melody = (AudioSource[])GameObject.Find ("Melody(Clone)").GetComponents<AudioSource>();
-		sampling=1/melody[0].clip.frequency;
+		mainMelody = (AudioSource)GameObject.Find ("Orchestra").GetComponent<AudioSource>();
 	}
-
-	void pauseMainMelody(){
-		foreach (AudioSource e in melody) {
-			if(e.isPlaying){
-				e.audio.Pause ();
-				Debug.Log("Pauseee: " + e.clip.name);
-			}
-		}
-	}
-
-	void playMainMelody(){
-		foreach (AudioSource e in melody) {
-			if(!e.isPlaying){
-				e.audio.Play ();
-				Debug.Log("Playy: " + e.clip.name);
-			}
-		}
-	}
-	
-	// Update is called once per frame
-
-	IEnumerator MyMethod() {
-		
-		yield return new WaitForSeconds(5);
-		
-	}
-
 
 	void Update () {
 
@@ -58,17 +37,11 @@ public class MusicSystem : MonoBehaviour {
 
 		if (check) {
 
-			//pauseMainMelody();
-
-			//Debug.Log("checked");
-
 			transform.position = collision.transform.position; //go to the closest position
-			
-			aux = melody[0].time;
-			Debug.Log("The main melody is on the time :" + aux+ " secs" );
-			
-		   
-			
+			aux = mainMelody.time;
+			//Debug.Log("The main melody is on the time :" + aux+ " secs" );
+
+			// 1. SELECT LOOP
 			helper = 0f;
 			if (aux < 28.8f)
 				helper = aux;
@@ -79,7 +52,6 @@ public class MusicSystem : MonoBehaviour {
 
 
 			if (isInPause) {
-				Debug.Log ("ISINPAUSE");
 				looper = audios [0].audio;
 				helper = 0;
 			} else {
@@ -116,32 +88,19 @@ public class MusicSystem : MonoBehaviour {
 					//special case for 5.1
 					looper = audios [5];
 			}
-			//if(looper != looperhelper){
-				//Debug.Log("AWAKEE1");
-			//}else{
-				//Debug.Log("AWAKEE2");
-				//looperhelper.Stop();
+
 			if(!looper.isPlaying){
 					looper.Play ();
-
-					//looperhelper=looper;//TODO: when do we change looperhelper?
 			}
-			//}
-			Debug.Log("this is the actual loop: " + looper.clip.name);
+			//Debug.Log("this is the actual loop: " + looper.clip.name);
+
 
 		} else {
-			//Debug.Log("stooooop");
+			//2. PLAY/STOP LOOP
 			if(looper.isPlaying){
-				//looperhelper.Stop();
 				looper.Pause ();
 			}
-
-
-
-			//playMainMelody();
 		}
-
-
 }
 
 }

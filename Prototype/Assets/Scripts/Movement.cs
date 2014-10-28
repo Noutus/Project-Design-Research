@@ -21,7 +21,13 @@ public class Movement : MonoBehaviour
 		maxSpeed = 10f;
 		maxTurn = 100f;
 	}
-	
+
+	void OnCollisionEnter(Collision col){
+		if (col.gameObject.name == "FinishObject") {
+			Application.LoadLevel ("BatGame");
+		}
+	}
+
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.W))
