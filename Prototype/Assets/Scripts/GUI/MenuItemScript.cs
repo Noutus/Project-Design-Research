@@ -5,6 +5,8 @@ public class MenuItemScript
 {
 	public string name;
 
+	public bool locked;
+
 	public MenuItemScript next;
 	public MenuItemScript previous;
 
