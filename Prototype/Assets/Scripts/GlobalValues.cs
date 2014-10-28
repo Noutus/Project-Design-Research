@@ -13,15 +13,12 @@ public class GlobalValues : MonoBehaviour
 {
 	// The number of levels unlocked by the player
 	// Data is loaded as the game starts
-	private int levelsUnlocked = 0;
+	private int levelsUnlocked;
 	public int LevelsUnlocked
 	{
 		get { return levelsUnlocked; }
 		set { levelsUnlocked = value; }
 	}
-
-	// Current level the player is at. Updated every time the player finishes a level
-	public int currentLevel;
 
 	// GlobalValues is an instance of an object. That means only one of it exists in the game
 	// The first time it is accessed, it creates a new GameObject that represents the GlobalValues
@@ -59,7 +56,10 @@ public class GlobalValues : MonoBehaviour
 		stream.Close();
 
 		levelsUnlocked = data.LevelsUnlocked;
-		currentLevel = levelsUnlocked;
+		if (levelsUnlocked <= 0)
+		{
+			levelsUnlocked = 0;
+		}
 	}
 
 	public void SaveGame()

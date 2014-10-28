@@ -65,7 +65,7 @@ public class MusicSystem : MonoBehaviour {
 			transform.position = collision.transform.position; //go to the closest position
 			
 			aux = melody[0].time;
-			Debug.Log("The main melody is on the time :" + aux+ " secs" );
+			//Debug.Log("The main melody is on the time :" + aux+ " secs" );
 			
 		   
 			
@@ -127,7 +127,7 @@ public class MusicSystem : MonoBehaviour {
 					//looperhelper=looper;//TODO: when do we change looperhelper?
 			}
 			//}
-			Debug.Log("this is the actual loop: " + looper.clip.name);
+			//Debug.Log("this is the actual loop: " + looper.clip.name);
 
 		} else {
 			//Debug.Log("stooooop");

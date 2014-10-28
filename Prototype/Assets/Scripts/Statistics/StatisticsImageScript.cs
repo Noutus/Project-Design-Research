@@ -38,11 +38,6 @@ public class StatisticsImageScript : MonoBehaviour
 		}
 		
 		applyDelay += Time.deltaTime;
-		
-		if (Input.GetKeyDown(KeyCode.Return))
-		{
-			ExportTexture();
-		}
 	}
 
 	protected void UpdateTexture()
@@ -50,7 +45,7 @@ public class StatisticsImageScript : MonoBehaviour
 		texture.Apply();
 	}
 
-	protected void ExportTexture()
+	public void ExportTexture()
 	{
 		// Convert Texture2D to .png.
 		byte[] image = texture.EncodeToPNG();
@@ -60,8 +55,13 @@ public class StatisticsImageScript : MonoBehaviour
 		dateNow = dateNow.Replace(@"/","-");
 		dateNow = dateNow.Replace(@":","-");
 
+		// Before saving, we need to check if the folder exists
+		string path = Application.dataPath + "/../Prints/";
+		FileInfo file = new FileInfo(path);
+		file.Directory.Create();
+
 		// Write image to a .png file.
-		File.WriteAllBytes(Application.dataPath + "/../Prints/" + filename + " " + dateNow + ".png", image);
+		File.WriteAllBytes(path + filename + " " + dateNow + ".png", image);
 	}
 
 	IEnumerator PrintLevel()

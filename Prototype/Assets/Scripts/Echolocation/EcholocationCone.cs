@@ -49,7 +49,7 @@ public class EcholocationCone : MonoBehaviour
 		//WHY??????????????????????
 		foreach (AudioSource e in melody) {
 			if(e.isPlaying){
-				e.audio.Pause ();
+				e.audio.Pause();
 				//Debug.Log("Pauseee: " + e.clip.name);
 			}
 		}
@@ -58,7 +58,7 @@ public class EcholocationCone : MonoBehaviour
 	void playMainMelody(){
 		foreach (AudioSource e in melody) {
 			if(!e.isPlaying){
-				e.audio.Play ();
+				e.audio.Play();
 				//Debug.Log("Playy: " + e.clip.name);
 			}
 		}
@@ -129,7 +129,7 @@ public class EcholocationCone : MonoBehaviour
 		}
 
 		//Debug.Log ("minimum distance " +playerWallDistance);
-		if(playerWallDistance < 3f){
+		if(playerWallDistance < 4f){
 
 			pauseMainMelody();
 			if (reference != lastreference && !firstTime) {
