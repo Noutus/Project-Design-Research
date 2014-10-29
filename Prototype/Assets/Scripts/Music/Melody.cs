@@ -72,12 +72,12 @@ public class Melody : MonoBehaviour
 		//Vector2 playRot = new Vector2 (Mathf.Sin(transform.rotation.z * Mathf.Deg2Rad), Mathf.Cos(transform.rotation.z * Mathf.Deg2Rad));
 		//Vector2 lineRot = new Vector2 (Mathf.Sin(hitFinal.transform.rotation.z * Mathf.Deg2Rad), Mathf.Cos(hitFinal.transform.rotation.z * Mathf.Deg2Rad));
 
-		Vector2 playRot = Vector2Helper.AngleToVector2(transform.rotation.z);
-		Vector2 lineRot = Vector2Helper.AngleToVector2(hitFinal.transform.rotation.z);
+		Vector2 playRot = Vector2Helper.AngleToVector2(transform.rotation.eulerAngles.z);
+		Vector2 lineRot = Vector2Helper.AngleToVector2(hitFinal.transform.rotation.eulerAngles.z);
 
-		//Debug.Log("Angle between " + playRot.ToString("G2") + " and " + lineRot.ToString("G2") + " is " + Vector2.Angle(playRot, lineRot));
+		Debug.Log("Angle between " + playRot.ToString("G2") + " and " + lineRot.ToString("G2") + " is " + Vector2.Angle(playRot, lineRot));
 
-		if (Vector2.Angle (playRot, lineRot) > 0.7) {
+		if (Vector2.Angle (playRot, lineRot) > 90) {
 			GetComponent<EcholocationCone> ().revers = true;
 		} else {
 			GetComponent<EcholocationCone> ().revers = false;
