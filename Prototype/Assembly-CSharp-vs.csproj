@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Statistics\PlayerLineScript.cs" />
      <Compile Include="Assets\Scripts\Statistics\StatisticsImageScript.cs" />
      <Compile Include="Assets\Scripts\Statistics\StatisticsValueScript.cs" />
+     <Compile Include="Assets\Scripts\Tutorial.cs" />
      <Compile Include="Assets\Scripts\momentaneous\testingLine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

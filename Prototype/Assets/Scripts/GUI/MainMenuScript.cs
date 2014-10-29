@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class MainMenuScript : MonoBehaviour
 {
+	private bool upPressed;
+	private bool downPressed;
+
 	protected bool up;
 	protected float t;
 	protected float startHeight;
@@ -46,21 +49,51 @@ public class MainMenuScript : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.UpArrow) && activeItem != menuItems[0])
+		if (Input.GetAxis("MenuNavigate") > 0.1f)
+		{
+			upPressed = false;
+			downPressed = true;
+		}
+		else if (Input.GetAxis("MenuNavigate") < -0.1f)
+		{
+			downPressed = false;
+			upPressed = true;
+		}
+		else
+		{
+			upPressed = false;
+			downPressed = false;
+		}
+
+		if (upPressed && t == 1 && activeItem != menuItems[0])
 		{
 			activeItem = activeItem.previous;
 			up = true;
 			t = 0;
 		}
 
-		if (Input.GetKeyDown(KeyCode.DownArrow) && activeItem != menuItems[menuItems.Length - 1])
+		else if (downPressed && t == 1 && activeItem != menuItems[menuItems.Length - 1])
 		{
 			activeItem = activeItem.next;
 			up = false;
 			t = 0;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Return))
+		else if (t == 1 && Input.GetKeyDown(KeyCode.UpArrow) && activeItem != menuItems[0])
+		{
+			activeItem = activeItem.previous;
+			up = true;
+			t = 0;
+		}
+
+		else if (t == 1 && Input.GetKeyDown(KeyCode.DownArrow) && activeItem != menuItems[menuItems.Length - 1])
+		{
+			activeItem = activeItem.next;
+			up = false;
+			t = 0;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Return) || Input.GetAxis("MenuSelect") > 0)
 		{
 			for (int i = 0; i < menuItemNames.Length; i++)
 			{
@@ -72,8 +105,7 @@ public class MainMenuScript : MonoBehaviour
 		}
 
 		t += Time.deltaTime * 4;
-		if (t >= 1)
-			t = 1;
+		if (t >= 1) t = 1;
 
 		if (up)
 			startHeight = Mathf.Lerp(Screen.height / 2 - startPosition.height * 1.2f, Screen.height / 2, t);

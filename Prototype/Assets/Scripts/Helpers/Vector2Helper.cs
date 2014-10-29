@@ -18,4 +18,9 @@ public class Vector2Helper : MonoBehaviour
 		
 		return new Vector2(_x2, _y2);
 	}
+
+	public static Vector2 AngleToVector2(float angle)
+	{
+		return Rotate(Vector2.up, angle);
+	}
 }
