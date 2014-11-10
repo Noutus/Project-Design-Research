@@ -17,7 +17,7 @@ public class Tutorial : MonoBehaviour
 
 	private AudioSource[] audioSources;
 
-	private EcholocationCone playerEcholocationCone;
+	private MusicController playerMusicController;
 	private Melody playerMelody;
 	private Movement playerMovement;
 
@@ -32,7 +32,7 @@ public class Tutorial : MonoBehaviour
 		audioSources[0].Play();
 
 		GameObject player = GameObject.Find("Player");
-		playerEcholocationCone = player.GetComponent<EcholocationCone>();
+		playerMusicController = player.GetComponent<MusicController>();
 		playerMelody = player.GetComponent<Melody>();
 		playerMovement = player.GetComponent<Movement>();
 
@@ -59,7 +59,7 @@ public class Tutorial : MonoBehaviour
 			{
 				audioSources[3].Play();
 				currentState = TutorialState.Move;
-				playerEcholocationCone.enabled = true;
+				playerMusicController.enabled = true;
 				playerMelody.enabled = true;
 			}
 			break;
@@ -146,7 +146,7 @@ public class Tutorial : MonoBehaviour
 
 	private void SetPlayer(bool b)
 	{
-		playerEcholocationCone.enabled = b;
+		playerMusicController.enabled = b;
 		playerMelody.enabled = b;
 		playerMovement.enabled = b;
 		if (!b) playerMovement.Reset();

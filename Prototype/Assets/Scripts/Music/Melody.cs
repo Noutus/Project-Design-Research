@@ -78,13 +78,13 @@ public class Melody : MonoBehaviour
 		Debug.Log("Angle between " + playRot.ToString("G2") + " and " + lineRot.ToString("G2") + " is " + Vector2.Angle(playRot, lineRot));
 
 		if (Vector2.Angle (playRot, lineRot) > 90) {
-			GetComponent<EcholocationCone> ().revers = true;
+			GetComponent<MusicController> ().revers = true;
 		} else {
-			GetComponent<EcholocationCone> ().revers = false;
+			GetComponent<MusicController> ().revers = false;
 		} 
 
 		/*if (Vector2.Angle (playRot, lineRot) > 0.7) {
-			GetComponent<EcholocationCone> ().reverse ();
+			GetComponent<MusicController> ().reverse ();
 
 		}*/
 		//Debug.Log("player" + Vector3.Angle(playerRotation,lineRotation));
