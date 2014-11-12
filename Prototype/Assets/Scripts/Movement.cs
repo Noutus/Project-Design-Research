@@ -4,7 +4,6 @@ using System.Collections;
 public class Movement : MonoBehaviour
 {
 	private bool upPressed;
-	private bool downPressed;
 	private bool leftPressed;
 	private bool rightPressed;
 	private bool strafeLeftPressed;
@@ -13,10 +12,11 @@ public class Movement : MonoBehaviour
 	private float maxSpeed;
 	private float maxTurn;
 
+	private StatisticsValueScript stats;
+
 	void Start()
 	{
 		upPressed = false;
-		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
 		strafeLeftPressed = false;
@@ -24,6 +24,8 @@ public class Movement : MonoBehaviour
 
 		maxSpeed = 10f;
 		maxTurn = 100f;
+
+		stats = GameObject.Find("Statistics").GetComponent<StatisticsValueScript>();
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -50,19 +52,21 @@ public class Movement : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.E)) strafeRightPressed = false;
 		*/
 
-		if (Input.GetKey(KeyCode.W) || Input.GetAxis("BatForward") > 0) upPressed = true;
+		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("BatForward") > 0) upPressed = true;
 		else upPressed = false;
 
-		if (Input.GetKey(KeyCode.A) || Input.GetAxisRaw("BatTurn") < -0.1f)
+		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetAxisRaw("BatTurn") < -0.1f)
 		{
 			leftPressed = true;
 			rightPressed = false;
 		}
-		else if (Input.GetKey(KeyCode.D) || Input.GetAxisRaw("BatTurn") > 0.1f)
+
+		else if (Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.RightArrow)  || Input.GetAxisRaw("BatTurn") > 0.1f)
 		{
 			rightPressed = true;
 			leftPressed = false;
 		}
+
 		else
 		{
 			leftPressed = false;
@@ -87,18 +91,50 @@ public class Movement : MonoBehaviour
 			strafeLeftPressed = false;
 		}
 
-		if (upPressed) transform.position += transform.up * Time.deltaTime * maxSpeed;
-		if (downPressed) transform.position -= transform.up * Time.deltaTime * maxSpeed;
-		if (leftPressed) transform.Rotate(Vector3.forward, maxTurn * Time.deltaTime);
-		if (rightPressed) transform.Rotate(Vector3.forward, -maxTurn * Time.deltaTime);
-		if (strafeLeftPressed) transform.position -= transform.right * maxSpeed * Time.deltaTime;
-		if (strafeRightPressed) transform.position += transform.right * maxSpeed * Time.deltaTime;
+		if (upPressed)
+		{
+			transform.position += transform.up * Time.deltaTime * maxSpeed;
+			stats.upTime += Time.deltaTime;
+		}
+
+		else
+		{
+			stats.idleTime += Time.deltaTime;
+		}
+
+		if (leftPressed)
+		{
+			transform.Rotate(Vector3.forward, maxTurn * Time.deltaTime);
+			stats.turnTime += Time.deltaTime;
+		}
+
+		if (rightPressed)
+		{
+			transform.Rotate(Vector3.forward, -maxTurn * Time.deltaTime);
+			stats.turnTime+= Time.deltaTime;
+		}
+
+		if (strafeLeftPressed)
+		{
+			transform.position -= transform.right * maxSpeed * Time.deltaTime;
+			stats.strafeTime += Time.deltaTime;
+		}
+
+		if (strafeRightPressed)
+		{
+			transform.position += transform.right * maxSpeed * Time.deltaTime;
+			stats.strafeTime += Time.deltaTime;
+		}
+
+		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) stats.turnAmount++;
+		if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) stats.turnAmount++;
+		if (Input.GetKeyDown(KeyCode.Q)) stats.strafeAmount++;
+		if (Input.GetKeyDown(KeyCode.E)) stats.strafeAmount++;
 	}
 
 	public void Reset()
 	{
 		upPressed = false;
-		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
 		strafeLeftPressed = false;

@@ -32,6 +32,11 @@ public class FinishScript : MonoBehaviour
 				go.GetComponent<PlayerLineScript>().ExportTexture();
 			}
 
+			if (go = GameObject.Find("Statistics"))
+			{
+				go.GetComponent<StatisticsValueScript>().ExportValues();
+			}
+
 			string name = "Level " + level.ToString();
 			if (Application.CanStreamedLevelBeLoaded(name))
 			{

@@ -16,7 +16,7 @@ public class Melody : MonoBehaviour
 
 	private static int maxIterations = 32;
 
-
+	private StatisticsValueScript stats;
 
 
 	void Awake()
@@ -24,7 +24,10 @@ public class Melody : MonoBehaviour
 		melody = (GameObject) GameObject.Instantiate(melodyPrefab); 
 	}
 
-
+	void Start()
+	{
+		stats = GameObject.Find("Statistics").GetComponent<StatisticsValueScript>();
+	}
 
 	void Update()
 	{
@@ -42,7 +45,7 @@ public class Melody : MonoBehaviour
 										if (i == 0) {
 												hitFinal = hit [0];
 										
-												if (Vector3.Distance (transform.position, hitFinal.point) < 0.9f) {
+												if (Vector3.Distance (transform.position, hitFinal.point) < 0.1f) {
 														isInLine = true;
 												}
 						    
@@ -52,7 +55,7 @@ public class Melody : MonoBehaviour
 														hitFinal = hit [0];
 												}
 										}
-										if (Vector3.Distance (transform.position, hitFinal.point) < 0.9f) {
+										if (Vector3.Distance (transform.position, hitFinal.point) < 0.1f) {
 												isInLine = true;
 										}
 								}
@@ -75,7 +78,10 @@ public class Melody : MonoBehaviour
 		Vector2 playRot = Vector2Helper.AngleToVector2(transform.rotation.eulerAngles.z);
 		Vector2 lineRot = Vector2Helper.AngleToVector2(hitFinal.transform.rotation.eulerAngles.z);
 
-		Debug.Log("Angle between " + playRot.ToString("G2") + " and " + lineRot.ToString("G2") + " is " + Vector2.Angle(playRot, lineRot));
+		//Debug.Log("Angle between " + playRot.ToString("G2") + " and " + lineRot.ToString("G2") + " is " + Vector2.Angle(playRot, lineRot));
+
+		stats.averageAngle += Vector2.Angle(playRot, lineRot) * Time.deltaTime;
+		stats.totalTime += Time.deltaTime;
 
 		if (Vector2.Angle (playRot, lineRot) > 90) {
 			GetComponent<MusicController> ().revers = true;
