@@ -85,8 +85,10 @@ public class Melody : MonoBehaviour
 
 		if (Vector2.Angle (playRot, lineRot) > 90) {
 			GetComponent<MusicController> ().revers = true;
+			melody.transform.position -= Vector3.Normalize(new Vector3(lineRot.x, lineRot.y, 0));
 		} else {
 			GetComponent<MusicController> ().revers = false;
+			melody.transform.position += Vector3.Normalize(new Vector3(lineRot.x, lineRot.y, 0));
 		} 
 
 		/*if (Vector2.Angle (playRot, lineRot) > 0.7) {
