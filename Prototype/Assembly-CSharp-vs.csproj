@@ -65,6 +65,8 @@
      <Compile Include="Assets\Scripts\Music\MusicController.cs" />
      <Compile Include="Assets\Scripts\MusicSystem.cs" />
      <Compile Include="Assets\Scripts\Radar.cs" />
+     <Compile Include="Assets\Scripts\Statistics\ExcelData.cs" />
+     <Compile Include="Assets\Scripts\Statistics\ExcelEntry.cs" />
      <Compile Include="Assets\Scripts\Statistics\PlayerHitsScript.cs" />
      <Compile Include="Assets\Scripts\Statistics\PlayerLineScript.cs" />
      <Compile Include="Assets\Scripts\Statistics\StatisticsImageScript.cs" />

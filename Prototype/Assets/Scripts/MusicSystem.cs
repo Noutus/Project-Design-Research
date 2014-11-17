@@ -21,6 +21,7 @@ public class MusicSystem : MonoBehaviour {
 
 	public GameObject collision;
 
+	private StatisticsValueScript stats;
 
 	void Start () {
 		audios=(AudioSource[])GetComponents<AudioSource>();
@@ -29,6 +30,8 @@ public class MusicSystem : MonoBehaviour {
 		helper = 0f;
 		looper = audios [1];
 		mainMelody = (AudioSource)GameObject.Find ("Orchestra").GetComponent<AudioSource>();
+
+		stats = GameObject.Find("Statistics").GetComponent<StatisticsValueScript>();
 	}
 
 	void Update () {
@@ -36,6 +39,7 @@ public class MusicSystem : MonoBehaviour {
 		//Before performing any unnecesary calculations we check whether the player is closer enough
 
 		if (check) {
+			stats.wallTime += Time.deltaTime;
 
 			transform.position = collision.transform.position; //go to the closest position
 

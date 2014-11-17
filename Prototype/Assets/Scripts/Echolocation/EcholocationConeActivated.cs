@@ -8,7 +8,7 @@ public class EcholocationConeActivated : MonoBehaviour
 
 	private static int nrOfSounds = 7;
 
-	private static float maxEchoTime = 3;
+	private static float maxEchoTime = 5;
 
 	private float echoTime;
 
@@ -24,13 +24,13 @@ public class EcholocationConeActivated : MonoBehaviour
 
 		echoTime = 0;
 
-		collisions = new GameObject[nrOfSounds];
+		/*collisions = new GameObject[nrOfSounds];
 		
 		for (int i = 0; i < collisions.Length; i++)
 		{
 			collisions[i] = (GameObject) GameObject.Instantiate(soundPrefab);
 			collisions[i].transform.position = hiddenPosition;
-		}
+		}*/
 	}
 	
 	void Update()
@@ -39,14 +39,28 @@ public class EcholocationConeActivated : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			pulsing = true;
-
 			echoTime = 0;
+
+			ShootSoundObjects();
 		}
 
 		// The actual code for the echo. Only runs when the pulse is activated.
 		if (pulsing)
 		{
-			UpdateSoundPositions();
+			//UpdateSoundPositions();
+		}
+	}
+
+	private void ShootSoundObjects()
+	{
+		for (int i = 0; i < nrOfSounds; i++)
+		{
+			Vector3 direction = transform.up;
+			direction = Vector2Helper.Rotate(direction, (180 / nrOfSounds) * (i - (nrOfSounds - 1) / 2));
+
+			GameObject sound = GameObject.Instantiate(soundPrefab, transform.position, Quaternion.identity) as GameObject;
+	
+			sound.GetComponent<EcholocationSound>().SetDirection(direction);
 		}
 	}
 
@@ -74,7 +88,7 @@ public class EcholocationConeActivated : MonoBehaviour
 			
 			if (hitPosition == Vector3.zero) hitPosition = hiddenPosition;
 			
-			collisions[i].transform.position = hitPosition;
+			//collisions[i].transform.position = hitPosition;
 		}
 		
 		// Keep track of the time since the player started the echo.
@@ -85,11 +99,13 @@ public class EcholocationConeActivated : MonoBehaviour
 		{
 			Debug.Log("Stopping pulse...");
 			pulsing = false;
-			
+
+			/*
 			for (int i = 0; i < collisions.Length; i++)
 			{
 				collisions[i].transform.position = hiddenPosition;
 			}
+			*/
 		}
 	}
 }

@@ -24,6 +24,8 @@ public class MusicController : MonoBehaviour
 	private AudioSource[] melody;
 	public bool revers;
 
+	private StatisticsValueScript stats;
+
 	void Start()
 	{
 		//melody = (AudioSource[])GameObject.Find ("Melody(Clone)").GetComponents<AudioSource>();
@@ -40,6 +42,8 @@ public class MusicController : MonoBehaviour
 			collisions[i] = (GameObject) GameObject.Instantiate(collisionObject);
 			collisions[i].transform.position = hiddenPosition;
 		}
+
+		stats = GameObject.Find("Statistics").GetComponent<StatisticsValueScript>();
 	}
 
 	void pauseMainMelody(){
@@ -91,7 +95,11 @@ public class MusicController : MonoBehaviour
 
 	void Update()
 	{
-		
+		if (revers)
+		{
+			stats.reverseTime += Time.deltaTime;
+		}
+
 		//1: RAYCASTING
 
 		RaycastHit[] hits = new RaycastHit[nrOfSounds];
