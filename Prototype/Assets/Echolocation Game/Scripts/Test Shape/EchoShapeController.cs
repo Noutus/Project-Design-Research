@@ -45,6 +45,7 @@ public class EchoShapeController : MonoBehaviour
 	void Start()
 	{
 		stats = GameObject.Find("Statistics").GetComponent<ShapeStatistics>();
+
 		player = GameObject.Find("Player");
 		wall = GameObject.Find("Wall");
 		camera = GameObject.Find("Camera");
@@ -76,6 +77,7 @@ public class EchoShapeController : MonoBehaviour
 			{
 				currentShape = wall.GetComponent<Shape>().ShapeName;
 
+				stats.playMode = "Turn";
 				stats.currentShape = currentShape;
 				stats.chosenShape = chosenShape;
 				stats.ExportValues();
@@ -98,7 +100,7 @@ public class EchoShapeController : MonoBehaviour
 		wall = GameObject.Instantiate(shapePrefabs[UnityEngine.Random.Range(0, shapePrefabs.Length)]) as GameObject;
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if (currentState == EchoAngleState.Playing)
 		{
@@ -149,5 +151,5 @@ public class EchoShapeController : MonoBehaviour
 				             , rightStyle);
 			}
 		}
-	}
+	}*/
 }

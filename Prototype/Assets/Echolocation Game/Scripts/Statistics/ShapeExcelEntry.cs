@@ -6,6 +6,7 @@ public class ShapeExcelEntry
 	[XmlAttribute("name")]
 	public long userID;
 
+	public string playMode;
 	public string currentShape;
 	public string chosenShape;
 
@@ -14,8 +15,9 @@ public class ShapeExcelEntry
 
 	}
 
-	public ShapeExcelEntry(long userID, string currentShape, string chosenShape)
+	public ShapeExcelEntry(long userID, string playMode, string currentShape, string chosenShape)
 	{
+		this.playMode = playMode;
 		this.currentShape = currentShape;
 		this.chosenShape = chosenShape;
 	}

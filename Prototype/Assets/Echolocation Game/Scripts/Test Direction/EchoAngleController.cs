@@ -80,7 +80,7 @@ public class EchoAngleController : MonoBehaviour
 		player.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if (currentState == EchoAngleState.Playing)
 		{
@@ -129,5 +129,5 @@ public class EchoAngleController : MonoBehaviour
 				              , rightStyle);
 			}
 		}
-	}
+	}*/
 }

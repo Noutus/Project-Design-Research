@@ -8,6 +8,7 @@ public class ShapeStatistics : MonoBehaviour
 {
 	private ShapeExcelData data;
 
+	public string playMode;
 	public string currentShape;
 	public string chosenShape;
 
@@ -19,6 +20,7 @@ public class ShapeStatistics : MonoBehaviour
 
 	public void Reset()
 	{
+		playMode = "";
 		currentShape = "";
 		chosenShape = "";
 	}
@@ -26,7 +28,7 @@ public class ShapeStatistics : MonoBehaviour
 	public void ExportValues()
 	{
 		data = data.ReadData();
-		data.SetData(System.DateTime.Now.Ticks, currentShape, chosenShape);
+		data.SetData(System.DateTime.Now.Ticks, playMode, currentShape, chosenShape);
 		data.WriteData();
 	}
 }

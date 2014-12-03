@@ -31,8 +31,8 @@ public class ShapeExcelData
 		stream.Close();
 	}
 
-	public void SetData(long userID, string currentShape, string chosenShape)
+	public void SetData(long userID, string playMode, string currentShape, string chosenShape)
 	{
-		entries.Add(new ShapeExcelEntry(userID, currentShape, chosenShape));
+		entries.Add(new ShapeExcelEntry(userID, playMode, currentShape, chosenShape));
 	}
 }

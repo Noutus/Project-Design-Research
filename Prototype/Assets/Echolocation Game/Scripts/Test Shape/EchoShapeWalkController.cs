@@ -45,6 +45,7 @@ public class EchoShapeWalkController : MonoBehaviour
 	void Start()
 	{
 		stats = GameObject.Find("Statistics").GetComponent<ShapeStatistics>();
+
 		player = GameObject.Find("Player");
 		wall = GameObject.Find("Wall");
 		camera = GameObject.Find("Camera");
@@ -76,6 +77,7 @@ public class EchoShapeWalkController : MonoBehaviour
 			{
 				currentShape = wall.GetComponent<Shape>().ShapeName;
 
+				stats.playMode = "Move";
 				stats.currentShape = currentShape;
 				stats.chosenShape = chosenShape;
 				stats.ExportValues();
@@ -100,7 +102,7 @@ public class EchoShapeWalkController : MonoBehaviour
 		wall.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if (currentState == EchoAngleState.Playing)
 		{
@@ -152,5 +154,5 @@ public class EchoShapeWalkController : MonoBehaviour
 				             , rightStyle);
 			}
 		}
-	}
+	}*/
 }

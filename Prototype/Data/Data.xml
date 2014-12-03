@@ -367,5 +367,83 @@
       <averageAngle>50.8364449</averageAngle>
       <totalTime>66.92756</totalTime>
     </User>
+    <User name="635524351270695860">
+      <levelName>Level Echo 1</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>0</upTime>
+      <turnTime>0</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>0</idleTime>
+      <reverseTime>0</reverseTime>
+      <wallTime>0</wallTime>
+      <averageAngle>NaN</averageAngle>
+      <totalTime>0</totalTime>
+    </User>
+    <User name="635524352826098038">
+      <levelName>Level Echo 1</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>0</upTime>
+      <turnTime>0</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>0</idleTime>
+      <reverseTime>0</reverseTime>
+      <wallTime>0</wallTime>
+      <averageAngle>NaN</averageAngle>
+      <totalTime>0</totalTime>
+    </User>
+    <User name="635524355142101280">
+      <levelName>Level Echo 1</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>0</upTime>
+      <turnTime>0</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>0</idleTime>
+      <reverseTime>0</reverseTime>
+      <wallTime>0</wallTime>
+      <averageAngle>NaN</averageAngle>
+      <totalTime>0</totalTime>
+    </User>
+    <User name="635524356418403067">
+      <levelName>Level Echo 2</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>0</upTime>
+      <turnTime>0</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>0</idleTime>
+      <reverseTime>0</reverseTime>
+      <wallTime>0</wallTime>
+      <averageAngle>NaN</averageAngle>
+      <totalTime>0</totalTime>
+    </User>
+    <User name="635524357007703892">
+      <levelName>Level 2</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>10.1030569</upTime>
+      <turnTime>4.0601573</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>2.66790962</idleTime>
+      <reverseTime>0</reverseTime>
+      <wallTime>0</wallTime>
+      <averageAngle>14.6300573</averageAngle>
+      <totalTime>12.7709713</totalTime>
+    </User>
+    <User name="635525903757794125">
+      <levelName>Level 1</levelName>
+      <turnAmount>0</turnAmount>
+      <strafeAmount>0</strafeAmount>
+      <upTime>20.7422714</upTime>
+      <turnTime>31.1676235</turnTime>
+      <strafeTime>0</strafeTime>
+      <idleTime>105.175446</idleTime>
+      <reverseTime>19.50248</reverseTime>
+      <wallTime>41.25527</wallTime>
+      <averageAngle>48.8165169</averageAngle>
+      <totalTime>125.086357</totalTime>
+    </User>
   </Users>
 </Data>
