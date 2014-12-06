@@ -1,27 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PacingMovement : MonoBehaviour {
+public class PacingMovement : MonoBehaviour
+{
+	private static float moveSpeed = 4;
 
 	private bool upPressed;
 	private bool downPressed;
 	private bool leftPressed;
 	private bool rightPressed;
 
-	public GameObject radar;
-
-	// Use this for initialization
-	void Start () {
-
-
+	void Start()
+	{
 		upPressed = false;
 		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update()
+	{
 		if (Input.GetKeyDown(KeyCode.W))
 			upPressed = true;
 		
@@ -47,23 +45,18 @@ public class PacingMovement : MonoBehaviour {
 			rightPressed = false;
 		
 		if (upPressed)
-			transform.position += Vector3.up * Time.deltaTime * 4;
+			transform.position += Vector3.up * Time.deltaTime * moveSpeed;
 		
 		if (downPressed)
-			transform.position += Vector3.down * Time.deltaTime * 4;
+			transform.position += Vector3.down * Time.deltaTime * moveSpeed;
 		
 		if (leftPressed)
-			transform.position += Vector3.left * Time.deltaTime * 4;
+			transform.position += Vector3.left * Time.deltaTime * moveSpeed;
 		
 		if (rightPressed)
-			transform.position += Vector3.right * Time.deltaTime * 4;
+			transform.position += Vector3.right * Time.deltaTime * moveSpeed;
 
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-
-			//radar.transform.position = this.transform.position;
-
-			//Debug.Log(radar.GetComponent<Radar>().numberOfPossiblePoints);
-		}
+		float a = GameObject.Find("MiddleLine").GetComponent<MiddleLine>().AngleBetween(this.gameObject);
+		Debug.Log(a);
 	}
 }

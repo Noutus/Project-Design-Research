@@ -87,6 +87,8 @@
      <Compile Include="Assets\Music Game\Scripts\Statistics\StatisticsValueScript.cs" />
      <Compile Include="Assets\Music Game\Scripts\Tutorial.cs" />
      <Compile Include="Assets\Music Game\Scripts\momentaneous\testingLine.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\MiddleLine.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\MiddlePoint.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\PacingMovement.cs" />
      <Compile Include="Assets\Tracks\Scripts\TrackAngleController.cs" />
      <Compile Include="Assets\Tracks\Scripts\TrackMusic.cs" />
