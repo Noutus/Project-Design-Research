@@ -23,4 +23,10 @@ public class Vector2Helper : MonoBehaviour
 	{
 		return Rotate(Vector2.up, angle);
 	}
+
+	public static Vector3 AngleToVector3(float angle)
+	{
+		Vector2 v = AngleToVector2(angle);
+		return new Vector3(v.x, v.y, 0);
+	}
 }
