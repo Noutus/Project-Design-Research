@@ -72,45 +72,61 @@ public class MiddleLine : MonoBehaviour
 	}
 
 	// Finds the closes point on the track to a certain GameObject.
-	public MiddlePoint ClosestPoint(GameObject g)
+	public int ClosestIndex(GameObject g)
 	{
 		int o = 0;
 		int p = pointsPerCurve;
-
+		
 		// For efficiency, first find the closest point in steps of pointsPerCurve.
-		for (int i = 2 * pointsPerCurve; i < points.Length; i += pointsPerCurve)
+		for (int i = 2 * pointsPerCurve; i < points.Length + 1; i += pointsPerCurve)
 		{
-			float k = Vector3.Distance(points[p].Position, g.transform.position);
-			float l = Vector3.Distance(points[i].Position, g.transform.position);
+			int t = i;
+			if (t > points.Length - 1) t = points.Length - 1;
 
+			float k = Vector3.Distance(points[p].Position, g.transform.position);
+			float l = Vector3.Distance(points[t].Position, g.transform.position);
+			
 			if (k < l) 
 			{
 				if (l < Vector3.Distance(points[o].Position, g.transform.position))
-			    {
+				{
 					o = p;
-					p = i;
+					p = t;
 				}
 				break;
 			}
-
+			
 			else
 			{
 				o = p;
-				p = i;
+				p = t;
 			}
 		}
-
+		
 		// Then search for the closest point in between the nearest steps.
-		MiddlePoint m = points[o];
-
+		int m = o;
+		
 		for (int j = o + 1; j < p; j++)
 		{
-			float k = Vector3.Distance(m.Position, g.transform.position);
+			float k = Vector3.Distance(points[m].Position, g.transform.position);
 			float l = Vector3.Distance(points[j].Position, g.transform.position);
-
-			if (k > l) m = points[j];
+			
+			if (k > l) m = j;
 		}
 
 		return m;
+	}
+
+	public MiddlePoint ClosestPoint(GameObject g)
+	{
+		int m = ClosestIndex(g);
+
+		return points[m];
+	}
+
+	public MiddlePoint GetPointsIndex(int i)
+	{
+		if (i > points.Length - 1) i = points.Length - 1;
+		return points[i];
 	}
 }
