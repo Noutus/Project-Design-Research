@@ -15,6 +15,7 @@ using System.Collections;
 public class MiddleLine : MonoBehaviour
 {
 	public GameObject pointPrefab;
+	public GameObject wallPrefab;
 
 	// Use this to determine the curves in the track.
 	public float[] curveAngles;
@@ -58,8 +59,16 @@ public class MiddleLine : MonoBehaviour
 	{
 		foreach (MiddlePoint m in points)
 		{
+			//create the line
 			GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle));
+
+			//create the right and left wall or every object
+			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 3, Quaternion.Euler(0, 0, m.Angle));
+			left.transform.localScale = new Vector3(1, Mathf.Cos(m.Angle * Mathf.Deg2Rad) * 3, 1);
+			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 3, Quaternion.Euler(0, 0, m.Angle));
+			right.transform.localScale = new Vector3(1, 5,1);
 		}
+
 	}
 
 	// Finds the angle between the middle line and a certain GameObject.
