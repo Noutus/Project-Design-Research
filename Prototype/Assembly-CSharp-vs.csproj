@@ -89,8 +89,10 @@
      <Compile Include="Assets\Music Game\Scripts\momentaneous\testingLine.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MiddleLine.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MiddlePoint.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\MusicParameters.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\PacingMovement.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\PacingSystem.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Tracks\Scripts\TrackAngleController.cs" />
      <Compile Include="Assets\Tracks\Scripts\TrackMusic.cs" />
      <Compile Include="Assets\Tracks\Scripts\TrackPlayer.cs" />
