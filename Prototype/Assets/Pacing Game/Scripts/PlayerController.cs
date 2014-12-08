@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour {
 	private bool leftPressed;
 	private bool rightPressed;
 	private float maxTurn = 90f,horizRotate=0f;
-	public float angle,angle2;
+	public float angle, angle2;
+	private Vector3 wallDistance;
 	// Update is called once per frame
 
 	public GameObject middleLine;
@@ -60,34 +61,41 @@ public class PlayerController : MonoBehaviour {
 //			print("close");
 //
 //
-		if (Input.GetKey (KeyCode.W)) {
-						upPressed = true;
+		//Simulate the wall by limiting the player movement to a given distance with respect to the line
+
+
+
+
+
+
+						if (Input.GetKey (KeyCode.W)) {
+								upPressed = true;
+						}
+						if (Input.GetKey (KeyCode.A))
+								leftPressed = true;
+						if (Input.GetKey (KeyCode.D))
+								rightPressed = true;
+						if (upPressed) {
+							
+						transform.position += transform.up * Time.deltaTime * speed;
 				}
-		if(Input.GetKey(KeyCode.A))
-		   leftPressed=true;
-		if(Input.GetKey(KeyCode.D))
-		   rightPressed=true;
-		if(upPressed){
-			transform.position += transform.up * Time.deltaTime * speed;
-		}
-		if (leftPressed)
-		{
-			if((maxTurn-horizRotate) >0)
-			transform.Rotate(Vector3.forward, maxTurn * Time.deltaTime);
-		}
+						if (leftPressed) {
+								if ((maxTurn - horizRotate) > 0)
+										transform.Rotate (Vector3.forward, maxTurn * Time.deltaTime);
+						}
 		
-		if (rightPressed)
-		{
-			if((maxTurn+horizRotate) >0)
-			transform.Rotate(Vector3.forward, -maxTurn * Time.deltaTime);
-		}
-		upPressed = leftPressed = rightPressed = false;
+						if (rightPressed) {
+								if ((maxTurn + horizRotate) > 0)
+										transform.Rotate (Vector3.forward, -maxTurn * Time.deltaTime);
+						}
+						upPressed = leftPressed = rightPressed = false;
 
 //		horizRotate += Input.GetAxis("Horizontal")*100* Time.deltaTime;
 //		horizRotate = Mathf.Clamp(horizRotate, -45, 45); 
 //		transform.rotation = Quaternion.Euler(0, horizRotate, 0);
 
 		
-}
+				}
+
 
 }

@@ -24,7 +24,8 @@ public class PacingSystem : MonoBehaviour {
 			if(e.GetComponent<MusicParameters>().isGood){
 				if(angle < 45){
 					if(angle > parameter){
-						music.volume = (45 - angle)/45;
+						music.volume = (45 + parameter - angle)/45;
+						Debug.Log("MUSIC" + music.volume);
 					}else{
 						music.volume=1;
 					}
