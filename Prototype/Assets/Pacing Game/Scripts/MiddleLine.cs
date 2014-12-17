@@ -23,7 +23,8 @@ public class MiddleLine : MonoBehaviour
 	// Use this to determine the curves in the track.
 	public float[] curveAngles;
 	
-	private MiddlePoint[] points;
+	public MiddlePoint[] points;
+	private int index;
 
 	// Howmany points there are in a curve. Adding more will increase the track's length.
 	private static int pointsPerCurve = 20;
@@ -33,12 +34,17 @@ public class MiddleLine : MonoBehaviour
 		trackObjects = new List<GameObject>();
 
 		points = new MiddlePoint[(curveAngles.Length - 1) * pointsPerCurve];
+		CreateTrack();
+		DrawTrack();
 	}
 	
 	void Start()
 	{
 
 	}
+	
+
+
 
 	// Creates the track according to the curveAngles array. The track is saved in the points array.
 	private void CreateTrack()

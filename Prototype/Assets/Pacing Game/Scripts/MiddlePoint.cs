@@ -15,10 +15,16 @@ public class MiddlePoint
 		get { return angle; }
 		set { angle = value; }
 	}
+	private bool counted;
+	public bool Counted{
+		get { return counted; }
+		set { counted = value; }
+	}
 
 	public MiddlePoint(Vector3 position, float angle)
 	{
 		this.position = position;
 		this.angle = angle;
+		this.counted = false;
 	}
 }
