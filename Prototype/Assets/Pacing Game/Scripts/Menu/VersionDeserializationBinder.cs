@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Reflection;
+using System.Runtime.Serialization;
 
-/*public sealed class VersionDeserializationBinder : SerializationBinder
+public sealed class VersionDeserializationBinder : SerializationBinder
 {
 	public override Type BindToType(string assemblyName, string typeName)
 	{
@@ -19,4 +22,4 @@ using System.Collections;
 		
 		return null; 
 	}
-}*/
+}
