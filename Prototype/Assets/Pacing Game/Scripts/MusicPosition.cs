@@ -8,7 +8,6 @@ public class MusicPosition : MonoBehaviour
 
 	void Update()
 	{
-		middleLine = GameObject.Find("MiddleLine").GetComponent<MiddleLine>();
 		transform.position = middleLine.GetPointsIndex(middleLine.ClosestIndex(player) + 4).Position;
 	}
 }

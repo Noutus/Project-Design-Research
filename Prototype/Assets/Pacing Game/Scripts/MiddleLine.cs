@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 // Author: Arnout Verburg
 
@@ -17,23 +18,26 @@ public class MiddleLine : MonoBehaviour
 	public GameObject pointPrefab;
 	public GameObject wallPrefab;
 
+	private List<GameObject> trackObjects;
+
 	// Use this to determine the curves in the track.
 	public float[] curveAngles;
 	
 	private MiddlePoint[] points;
 
 	// Howmany points there are in a curve. Adding more will increase the track's length.
-	private static int pointsPerCurve = 10;
+	private static int pointsPerCurve = 20;
 
 	void Awake()
 	{
+		trackObjects = new List<GameObject>();
+
 		points = new MiddlePoint[(curveAngles.Length - 1) * pointsPerCurve];
 	}
 	
 	void Start()
 	{
-		CreateTrack();
-		DrawTrack();
+
 	}
 
 	// Creates the track according to the curveAngles array. The track is saved in the points array.
@@ -60,13 +64,17 @@ public class MiddleLine : MonoBehaviour
 		foreach (MiddlePoint m in points)
 		{
 			//create the line
-			GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle));
+			GameObject middle = GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle)) as GameObject;
 
 			//create the right and left wall or every object
-			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 3, Quaternion.Euler(0, 0, m.Angle));
+			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 5, Quaternion.Euler(0, 0, m.Angle));
 			left.transform.localScale = new Vector3(1, Mathf.Cos(m.Angle * Mathf.Deg2Rad) * 3, 1);
-			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 3, Quaternion.Euler(0, 0, m.Angle));
+			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 5, Quaternion.Euler(0, 0, m.Angle));
 			right.transform.localScale = new Vector3(1, 5,1);
+
+			trackObjects.Add(middle);
+			trackObjects.Add(left);
+			trackObjects.Add(right);
 		}
 
 	}
@@ -137,5 +145,28 @@ public class MiddleLine : MonoBehaviour
 	{
 		if (i > points.Length - 1) i = points.Length - 1;
 		return points[i];
+	}
+
+	public MiddlePoint GetPointsIndex(string s)
+	{
+		int i = 0;
+		if (s == "Last") i = points.Length - 1;
+		return points[i];
+	}
+
+	public void Load()
+	{
+		CreateTrack();
+		DrawTrack();
+	}
+
+	public void Unload()
+	{
+		foreach (GameObject g in trackObjects)
+		{
+			Destroy(g);
+		}
+
+		trackObjects.Clear();
 	}
 }

@@ -97,5 +97,10 @@ public class PlayerController : MonoBehaviour {
 		
 				}
 
+	public void SetTrack(GameObject g)
+	{
+		middleLine = g;
+	}
+
 
 }
