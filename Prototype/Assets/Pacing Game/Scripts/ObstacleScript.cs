@@ -20,6 +20,8 @@ public class ObstacleScript : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 
+		PlayerController.Instance.jumpAllowed = true;
+
 		audio.playOnAwake = false;
 		audio.clip = startSong;
 		audio.Play();
@@ -38,6 +40,8 @@ public class ObstacleScript : MonoBehaviour
 
 	void jumpingPlayer()
 	{
+		PlayerController.Instance.jumpAllowed = false;
+
 		//then we decide which music to play
 		if (!pressed)
 		{

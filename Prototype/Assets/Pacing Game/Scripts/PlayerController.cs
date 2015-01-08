@@ -1,19 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+	private static PlayerController S_instance;
+	public static PlayerController Instance
+	{
+		get
+		{
+			if (S_instance == null)
+			{
+				Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerController)));
+				S_instance = (PlayerController) GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerController));
+			}
 
-	// Use this for initialization
+			return S_instance;
+		}
+	}
+
 	public float speed;
-	private bool upPressed;
-	private bool leftPressed;
-	private bool rightPressed;
 	private float maxTurn = 90f,horizRotate=0f;
 	public float angle, angle2;
 	private Vector3 wallDistance;
-	// Update is called once per frame
 
 	public GameObject middleLine;
+
+	private bool upPressed;
+	private bool leftPressed;
+	private bool rightPressed;
+
+	public bool jumpAllowed = false;
+	private float moveCooldown = 0;
 
 	void Start()
 	{
@@ -25,7 +42,10 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void Update () {
+	void Update()
+	{
+
+
 		/*float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		if (moveVertical != 0 && moveHorizontal != 0) {
@@ -74,44 +94,34 @@ public class PlayerController : MonoBehaviour {
 //
 		//Simulate the wall by limiting the player movement to a given distance with respect to the line
 
+		if (Input.GetKey (KeyCode.W)) upPressed = true;
+		if (moveCooldown > 0) upPressed = false;
+		if (Input.GetKey (KeyCode.A)) leftPressed = true;
+		if (Input.GetKey (KeyCode.D)) rightPressed = true;
 
+		if (upPressed)
+		{	
+			transform.position += transform.up * Time.deltaTime * speed;
+		}
 
+		if (leftPressed && (maxTurn - horizRotate) > 0)
+		{
+			transform.Rotate (Vector3.forward, maxTurn * Time.deltaTime);
+		}
 
+		if (rightPressed && (maxTurn + horizRotate) > 0)
+		{
+			transform.Rotate (Vector3.forward, -maxTurn * Time.deltaTime);
+		}
 
+		upPressed = leftPressed = rightPressed = false;
 
-						if (Input.GetKey (KeyCode.W)) {
-								upPressed = true;
-						}
-						if (Input.GetKey (KeyCode.A))
-								leftPressed = true;
-						if (Input.GetKey (KeyCode.D))
-								rightPressed = true;
-						if (upPressed) {
-							
-						transform.position += transform.up * Time.deltaTime * speed;
-				}
-						if (leftPressed) {
-								if ((maxTurn - horizRotate) > 0)
-										transform.Rotate (Vector3.forward, maxTurn * Time.deltaTime);
-						}
-		
-						if (rightPressed) {
-								if ((maxTurn + horizRotate) > 0)
-										transform.Rotate (Vector3.forward, -maxTurn * Time.deltaTime);
-						}
-						upPressed = leftPressed = rightPressed = false;
-
-//		horizRotate += Input.GetAxis("Horizontal")*100* Time.deltaTime;
-//		horizRotate = Mathf.Clamp(horizRotate, -45, 45); 
-//		transform.rotation = Quaternion.Euler(0, horizRotate, 0);
-
-		
-				}
+		if ( moveCooldown > 0) moveCooldown -= Time.deltaTime;
+		if (!jumpAllowed && Input.GetKey(KeyCode.Space)) moveCooldown = 0.5f;
+	}
 
 	public void SetTrack(GameObject g)
 	{
 		middleLine = g;
 	}
-
-
 }

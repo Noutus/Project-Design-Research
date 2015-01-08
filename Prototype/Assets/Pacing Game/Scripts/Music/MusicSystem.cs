@@ -16,11 +16,6 @@ public class MusicSystem : MonoBehaviour
 		badMusic = GameObject.Instantiate(badMusicPrefab) as GameObject;
 	}
 
-	void Update()
-	{
-		if (audio.isPlaying) Debug.Log(transform.name);
-	}
-
 	public void StopMusic()
 	{
 		audio.Stop();

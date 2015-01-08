@@ -41,17 +41,17 @@ public class PacingSystem : MonoBehaviour
 				//first we check the "good" instruments
 				if(e.GetComponent<MusicParameters>().isGood)
 				{
-					if (angle < parameter) music.volume = 0.5f;
+					if (angle < parameter) music.volume = 1;
 					else if (angle > parameter2) music.volume = 0;
-					else music.volume = 0.5f - (0.5f / (parameter2 - parameter) * (angle - parameter));
+					else music.volume = 1 - (1 / (parameter2 - parameter) * (angle - parameter));
 				}
 				
 				//else we check the "bad" instruments
 				else
 				{
 					if (angle < parameter) music.volume = 0;
-					else if (angle > parameter2) music.volume = 0.5f;
-					else music.volume = 0.5f / (parameter2 - parameter) * (angle - parameter);
+					else if (angle > parameter2) music.volume = 1;
+					else music.volume = 1 / (parameter2 - parameter) * (angle - parameter);
 				}	
 			}
 		}
