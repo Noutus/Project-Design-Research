@@ -1,8 +1,22 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PacingFinish : MonoBehaviour
 {
+	private static PacingFinish s_Instance = null;
+	public static PacingFinish instance
+	{
+		get
+		{
+			if (s_Instance == null)
+			{
+				s_Instance = GameObject.Find("Finish").GetComponent<PacingFinish>();
+			}
+			
+			return s_Instance;
+		}
+	}
+
 	private MiddleLine track;
 
 	public GameObject[] trackPrefabs;
@@ -21,6 +35,8 @@ public class PacingFinish : MonoBehaviour
 
 	public void Initialize()
 	{
+		MusicTracker.instance.StartLevel();
+
 		index = MusicGlobals.instance.Level;
 
 		LoadLevel(index);
@@ -28,9 +44,14 @@ public class PacingFinish : MonoBehaviour
 
 	void OnTriggerEnter()
 	{
+		MusicTracker.instance.endLevel = true;
+	}
+
+	public void NewLevel()
+	{
 		// Unload old level
 		track.Unload();
-
+		
 		// Load new level
 		LoadLevel(index);
 	}

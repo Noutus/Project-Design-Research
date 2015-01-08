@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,12 +18,16 @@ public class MiddleLine : MonoBehaviour
 {
 	public GameObject pointPrefab;
 	public GameObject wallPrefab;
+	public GameObject obstaclePrefab;
+	public GameObject collectablePrefab;
 
 	private List<GameObject> trackObjects;
 
 	// Use this to determine the curves in the track.
 	public float[] curveAngles;
-	
+	public int[] obstacleIndexes;
+	public int[] collectableIndexes;
+
 	public MiddlePoint[] points;
 	private int index;
 
@@ -34,17 +39,17 @@ public class MiddleLine : MonoBehaviour
 		trackObjects = new List<GameObject>();
 
 		points = new MiddlePoint[(curveAngles.Length - 1) * pointsPerCurve];
-		CreateTrack();
-		DrawTrack();
 	}
-	
+
 	void Start()
 	{
-
+		GameObject[] g = GameObject.FindGameObjectsWithTag("Instrument");
+		foreach (GameObject go in g)
+		{
+			MusicPosition m;
+			if (m = go.GetComponent<MusicPosition>()) m.middleLine = this;
+		}
 	}
-	
-
-
 
 	// Creates the track according to the curveAngles array. The track is saved in the points array.
 	private void CreateTrack()
@@ -62,6 +67,26 @@ public class MiddleLine : MonoBehaviour
 				v += Vector2Helper.AngleToVector3(a);
 			}
 		}
+
+		for (int k = 0; k < obstacleIndexes.Length; k++)
+		{
+			Vector3 spawnPosition = points[obstacleIndexes[k]].Position;
+			Quaternion spawnRotation = Quaternion.Euler(0, 0, points[obstacleIndexes[k]].Angle);
+			GameObject g = Instantiate(obstaclePrefab, spawnPosition, spawnRotation) as GameObject;
+		}
+
+		for (int l = 0; l < collectableIndexes.Length; l++)
+		{
+			Vector3 spawnPosition = points[collectableIndexes[l]].Position;
+			Vector2 spawnExtra = Vector2Helper.AngleToVector2(points[collectableIndexes[l]].Angle);
+			int r = Mathf.RoundToInt(UnityEngine.Random.value);
+			spawnExtra = Vector2Helper.Rotate(spawnExtra, 90 * r - 270 * (r - 1)) * 3;
+			spawnPosition.x += spawnExtra.x;
+			spawnPosition.y += spawnExtra.y;
+			Quaternion spawnRotation = Quaternion.Euler(0, 0, points[collectableIndexes[l]].Angle);
+			GameObject g = Instantiate(collectablePrefab, spawnPosition, spawnRotation) as GameObject;
+			CollectableController.Instance.AddCollectable(g);
+		}
 	}
 
 	// Shows the track in the scene.
@@ -76,7 +101,7 @@ public class MiddleLine : MonoBehaviour
 			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 5, Quaternion.Euler(0, 0, m.Angle));
 			left.transform.localScale = new Vector3(1, Mathf.Cos(m.Angle * Mathf.Deg2Rad) * 3, 1);
 			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 5, Quaternion.Euler(0, 0, m.Angle));
-			right.transform.localScale = new Vector3(1, 5,1);
+			right.transform.localScale = new Vector3(1, 5, 1);
 
 			trackObjects.Add(middle);
 			trackObjects.Add(left);
@@ -156,7 +181,7 @@ public class MiddleLine : MonoBehaviour
 	public MiddlePoint GetPointsIndex(string s)
 	{
 		int i = 0;
-		if (s == "Last") i = points.Length - 1;
+		if (s == "Last") i = points.Length - 201;
 		return points[i];
 	}
 
@@ -174,5 +199,7 @@ public class MiddleLine : MonoBehaviour
 		}
 
 		trackObjects.Clear();
+
+		Destroy(gameObject);
 	}
 }

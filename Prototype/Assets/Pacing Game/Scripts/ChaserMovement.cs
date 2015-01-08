@@ -6,48 +6,97 @@ public class ChaserMovement : MonoBehaviour {
 	private int index;
 	public GameObject player;
 	public MiddlePoint[] points;
-	public int timeDelayed;
-	// Use this for initialization
-	void Start () {
+	public float timeDelayed;
+	public float moveInterval;
+
+	void Start()
+	{
 		index = 0;
-		points = GetComponent<MiddleLine> ().points;
-		StartCoroutine (MyMethod ());
+		player = GameObject.FindGameObjectWithTag("Player");
+
+		points = GetComponent<MiddleLine>().points;
+		StartCoroutine(StartMoving());
 	}
-	
-	// Update is called once per frame
-	public void increaseIndex(){
+
+	public void increaseIndex()
+	{
+		Debug.Log("Moving Closer");
+
 		int i= index + 3;
 		for(; index < i ;index++)
-			points[index].Counted=true;
+		{
+			int j = index;
+			if (j >= points.Length) j = points.Length - 1;
+			points[j].Counted = true;
+		}
 	}
-	public void decreaseIndex(){
+
+	public void decreaseIndex()
+	{
+		Debug.Log("Moving Away");
+
 		int i= index - 3;
 		for(; index > i ;index--)
-			points[index].Counted=true;
-
-	}
-	IEnumerator MyMethod() {
-		yield return new WaitForSeconds(timeDelayed);
-		Debug.Log ("hey");
-		points [index].Counted=true;
-		MiddlePoint point = GetComponent<MiddleLine> ().ClosestPoint (player);
-		int i = 0;
-		foreach(MiddlePoint e in points){
-			if(e == point){
-				break;
-			}else{
-				i++;
-			}
+		{
+			int j = index;
+			if (j < 0) j = 0;
+			points[j].Counted = true;
 		}
-		if (point.Counted) {
+	}
+
+	IEnumerator StartMoving()
+	{
+		yield return new WaitForSeconds(timeDelayed);
+		StartCoroutine(MyMethod());
+	}
+
+	IEnumerator MyMethod()
+	{
+		yield return new WaitForSeconds(moveInterval);
+
+		Debug.Log ("Moving Chaser Object");
+
+		if (index < 0) index = 0;
+		if (index >= points.Length) index = points.Length;
+
+		points [index].Counted=true;
+
+		MiddlePoint point = GetComponent<MiddleLine>().ClosestPoint(player);
+
+		int i = 0;
+
+		foreach(MiddlePoint e in points)
+		{
+			if (e == point) break;
+			else i++;
+		}
+		
+		Debug.Log("i: " + i);
+
+
+		if (point.Counted)
+		{
 			Debug.Log("THE PLAYER HAS LOST");
 		}
-		else if((i-3)>0 && points[i - 3].Counted){
-			Debug.Log ("THE CHASER OBJECT IS CLOSE");
+
+		else if ((i - 5) > 0 && points[i - 5].Counted)
+		{
+			MusicTracker.instance.SwitchTempo(2);
 		}
+
+		else if ((i - 10) > 0 && points[i - 10].Counted)
+		{
+			MusicTracker.instance.SwitchTempo(1);
+		}
+
+		else
+		{
+			MusicTracker.instance.SwitchTempo(0);
+		}
+
 		index++;
 
-		StartCoroutine (MyMethod ());
+		StartCoroutine (MyMethod());
 	}
 
 }

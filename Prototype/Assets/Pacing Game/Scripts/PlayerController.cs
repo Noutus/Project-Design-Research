@@ -14,6 +14,17 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 
 	public GameObject middleLine;
+
+	void Start()
+	{
+		GameObject[] g = GameObject.FindGameObjectsWithTag("Instrument");
+		foreach (GameObject go in g)
+		{
+			MusicPosition m;
+			if (m = go.GetComponent<MusicPosition>()) m.player = gameObject;
+		}
+	}
+
 	void Update () {
 		/*float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");

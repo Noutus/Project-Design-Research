@@ -5,18 +5,22 @@ public class CollectableScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		/*Question: shall we spawn this object in MiddlePoint position? (as we do with the obstacle)
+		 * 
+		MiddlePoint m = GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<MiddleLine> ().points [2]; // I have taken this point just randomly
+		transform.position = m.Position;
+		transform.rotation = Quaternion.Euler(0, 0, m.Angle);
+		
+		*/
 	}
 
-	void OnCollisionEnter(Collision col){
-		if (col.gameObject.tag == "Player") {
-				GameObject.FindGameObjectWithTag("MiddleLine").GetComponent<ChaserMovement>().decreaseIndex();
-				GameObject.Destroy (gameObject);
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			GameObject.FindGameObjectWithTag("MiddleLine").GetComponent<ChaserMovement>().decreaseIndex();
+			CollectableController.Instance.RemoveCollectable(gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

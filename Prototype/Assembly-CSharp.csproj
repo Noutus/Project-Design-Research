@@ -47,13 +47,19 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CollectableScript.cs" />
+     <Compile Include="Assets\ObstacleStart.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\ChaserMovement.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Controllers\CollectableController.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Controllers\ObstacleController.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\MusicGlobals.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\MusicSave.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\SoundMenu.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\VersionDeserializationBinder.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MiddleLine.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MiddlePoint.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Music\BadSystem.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Music\MusicSystem.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Music\MusicTracker.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MusicParameters.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MusicPosition.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\ObstacleScript.cs" />

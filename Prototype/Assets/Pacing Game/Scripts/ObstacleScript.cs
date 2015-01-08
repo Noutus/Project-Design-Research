@@ -1,31 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObstacleScript : MonoBehaviour {
+/*
+ * This object represents the obstacle once the player has collided with the ObstacleStart
+ * It starts playing the first song, then when the first song finishes it check whether the player has pressed the button to avoid the obstacle
+ * and plays a good or bad music as a result.
+ * One question could be: shall we make this object to be in the same position that the player so that they can listen to it?
+ * 
+ */
+public class ObstacleScript : MonoBehaviour
+{
+	private GameObject player;
 
-	// Use this for initialization
-	void Start () {
-		MiddlePoint m = GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<MiddleLine> ().points [2];
-		transform.position = m.Position;
-		transform.rotation = Quaternion.Euler(0, 0, m.Angle);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public AudioClip startSong,goodResult,badResult;
+
+	private bool pressed = false;
+
+	void Start()
+	{
+		player = GameObject.FindGameObjectWithTag("Player");
+
+		audio.playOnAwake = false;
+		audio.clip = startSong;
+		audio.Play();
+		Invoke ("jumpingPlayer",audio.clip.length);
 	}
 
-	void OnCollisionEnter(Collision col){
-				if (col.gameObject.tag == "Player") {
-			audio.Play();
-			   			while(audio.isPlaying){
-						Debug.Log ("hhhh");
-				}
-				
-						if (!Input.GetKey (KeyCode.Space)) {
-							GameObject.FindGameObjectWithTag("MiddleLine").GetComponent<ChaserMovement>().increaseIndex();
-						}
-						GameObject.Destroy (gameObject);
-				}
+	void Update()
+	{
+		transform.position = player.transform.position;
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			pressed = true;
 		}
+	}
+
+	void jumpingPlayer()
+	{
+		//then we decide which music to play
+		if (!pressed)
+		{
+			audio.clip = badResult;
+			audio.Play();
+			GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<ChaserMovement>().increaseIndex ();
+		}
+
+		else
+		{
+			audio.clip = goodResult;
+			audio.Play();
+
+		}
+
+		GameObject.Destroy (gameObject,audio.clip.length);
+	}
 }
