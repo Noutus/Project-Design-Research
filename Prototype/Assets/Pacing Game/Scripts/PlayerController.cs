@@ -93,10 +93,10 @@ public class PlayerController : MonoBehaviour
 //
 		//Simulate the wall by limiting the player movement to a given distance with respect to the line
 
-		if (Input.GetKey (KeyCode.W)) upPressed = true;
+		if (Input.GetKey (KeyCode.W) || Input.GetAxis("Vertical") > 0.2f || Input.GetAxis("BatStrafe") < -0.2f) upPressed = true;
 		if (moveCooldown > 0) upPressed = false;
-		if (Input.GetKey (KeyCode.A)) leftPressed = true;
-		if (Input.GetKey (KeyCode.D)) rightPressed = true;
+		if (Input.GetKey (KeyCode.A) || Input.GetAxis("Horizontal") < -0.2f) leftPressed = true;
+		if (Input.GetKey (KeyCode.D) || Input.GetAxis("Horizontal") > 0.2f) rightPressed = true;
 
 		if (upPressed)
 		{	
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 		upPressed = leftPressed = rightPressed = false;
 
 		if ( moveCooldown > 0) moveCooldown -= Time.deltaTime;
-		if (!jumpAllowed && Input.GetKey(KeyCode.Space)) moveCooldown = 0.5f;
+		if (!jumpAllowed && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0.2f)) moveCooldown = 0.5f;
 	}
 
 	public void SetTrack(GameObject g)

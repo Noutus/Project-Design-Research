@@ -74,13 +74,10 @@ public class ChaserMovement : MonoBehaviour
 			if (e == point) break;
 			else i++;
 		}
-		
-		Debug.Log("i: " + i);
-
 
 		if (point.Counted)
 		{
-			Debug.Log("THE PLAYER HAS LOST");
+			//Debug.Log("THE PLAYER HAS LOST");
 		}
 
 		else if ((i - 5) > 0 && points[i - 5].Counted)

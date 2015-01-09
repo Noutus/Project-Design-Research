@@ -32,7 +32,7 @@ public class ObstacleScript : MonoBehaviour
 	{
 		transform.position = player.transform.position;
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1") > 0.2f)
 		{
 			pressed = true;
 		}
@@ -45,6 +45,7 @@ public class ObstacleScript : MonoBehaviour
 		//then we decide which music to play
 		if (!pressed)
 		{
+			Debug.Log("Obstacle Success");
 			audio.clip = badResult;
 			audio.Play();
 			GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<ChaserMovement>().increaseIndex ();
@@ -52,6 +53,7 @@ public class ObstacleScript : MonoBehaviour
 
 		else
 		{
+			Debug.Log("Obstacle Fail");
 			audio.clip = goodResult;
 			audio.Play();
 

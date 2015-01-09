@@ -57,8 +57,6 @@ public class MusicTracker : MonoBehaviour
 
 	void Start()
 	{
-		Debug.Log(transform.name);
-
 		musicSystems = new GameObject[musicSystemPrefabs.Length];
 		for (int i = 0; i < musicSystems.Length; i++)
 		{

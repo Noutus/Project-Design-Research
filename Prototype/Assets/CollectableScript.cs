@@ -5,8 +5,11 @@ public class CollectableScript : MonoBehaviour {
 
 	public GameObject prefab;
 
+
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		/*Question: shall we spawn this object in MiddlePoint position? (as we do with the obstacle)
 		 * 
 		MiddlePoint m = GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<MiddleLine> ().points [2]; // I have taken this point just randomly
@@ -20,11 +23,17 @@ public class CollectableScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player")
 		{
-			GameObject.FindGameObjectWithTag("MiddleLine").GetComponent<ChaserMovement>().decreaseIndex();
+			if (Vector3.Distance(col.transform.position, transform.position) < 2)
+			{
+				Debug.Log("Collectable Success");
+
+				GameObject.FindGameObjectWithTag("MiddleLine").GetComponent<ChaserMovement>().decreaseIndex();
+				GameObject.Instantiate(prefab);
+			}
+
+			else Debug.Log("Collectable Fail");
+
 			CollectableController.Instance.RemoveCollectable(gameObject);
-
-			GameObject.Instantiate(prefab);
-
 			Destroy(gameObject);
 		}
 	}

@@ -43,15 +43,13 @@ public class Chaser : MonoBehaviour
 	{
 		if (player != null && middleLine != null)
 		{
-			if (lerpTime < 0.1)
+			if (lerpTime < 1)
 			{
 				lerpTime += Time.deltaTime / 0.4f;
 			}
 
 			if (toAngle != previousToAngle || to != previousTo)
 			{
-				Debug.Log("Reset");
-
 				from = previousTo;
 				fromAngle = previousToAngle;
 				lerpTime = 0;

@@ -16,7 +16,6 @@ public class PacingSystem : MonoBehaviour
 	void Start()
 	{
 		instruments = MusicTracker.instance.ActiveSystem;
-		Debug.Log(instruments.Length);
 	}
 
 	void Update()
