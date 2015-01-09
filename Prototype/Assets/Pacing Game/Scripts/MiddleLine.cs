@@ -34,11 +34,16 @@ public class MiddleLine : MonoBehaviour
 	// Howmany points there are in a curve. Adding more will increase the track's length.
 	private static int pointsPerCurve = 20;
 
+	private GameObject chaser;
+	public GameObject chaserPrefab;
+
 	void Awake()
 	{
 		trackObjects = new List<GameObject>();
 
 		points = new MiddlePoint[(curveAngles.Length - 1) * pointsPerCurve];
+
+		chaser = GameObject.Instantiate(chaserPrefab) as GameObject;
 	}
 
 	void Start()

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\CollectableScript.cs" />
      <Compile Include="Assets\ObstacleStart.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Chaser.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\ChaserMovement.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Controllers\CollectableController.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Controllers\ObstacleController.cs" />

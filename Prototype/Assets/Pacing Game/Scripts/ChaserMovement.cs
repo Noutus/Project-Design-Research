@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChaserMovement : MonoBehaviour {
+public class ChaserMovement : MonoBehaviour
+{
 
 	private int index;
 	public GameObject player;
@@ -16,6 +17,11 @@ public class ChaserMovement : MonoBehaviour {
 
 		points = GetComponent<MiddleLine>().points;
 		StartCoroutine(StartMoving());
+	}
+
+	void Update()
+	{
+		Chaser.Instance.SetTo(points[index].Position, points[index].Angle);
 	}
 
 	public void increaseIndex()
@@ -53,8 +59,6 @@ public class ChaserMovement : MonoBehaviour {
 	IEnumerator MyMethod()
 	{
 		yield return new WaitForSeconds(moveInterval);
-
-		Debug.Log ("Moving Chaser Object");
 
 		if (index < 0) index = 0;
 		if (index >= points.Length) index = points.Length;
