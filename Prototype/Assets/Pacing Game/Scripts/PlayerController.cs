@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
+		Chaser.Instance.SetNewPlayer(gameObject);
+		GameObject.Find("Audio Listener").GetComponent<FollowPlayer>().SetPlayer(gameObject);
+
 		GameObject[] g = GameObject.FindGameObjectsWithTag("Instrument");
 		foreach (GameObject go in g)
 		{

@@ -45,7 +45,7 @@ public class ObstacleScript : MonoBehaviour
 		//then we decide which music to play
 		if (!pressed)
 		{
-			Debug.Log("Obstacle Success");
+			Debug.Log("Obstacle Fail");
 			audio.clip = badResult;
 			audio.Play();
 			GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<ChaserMovement>().increaseIndex ();
@@ -53,7 +53,7 @@ public class ObstacleScript : MonoBehaviour
 
 		else
 		{
-			Debug.Log("Obstacle Fail");
+			Debug.Log("Obstacle Success");
 			audio.clip = goodResult;
 			audio.Play();
 

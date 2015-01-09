@@ -44,6 +44,7 @@ public class SoundMenu : MonoBehaviour
 
 	private void SelectMenuItem(int i)
 	{
+		if (i < 0) i += menuSounds.Length;
 		i = i % menuSounds.Length;
 
 		MusicGlobals.instance.Level = menuReferences[i];
@@ -55,7 +56,7 @@ public class SoundMenu : MonoBehaviour
 
 	private void ChangeMenuItem(int i)
 	{
-		if (i < 0) i += menuSounds.Length;
+		while (i < 0) i += menuSounds.Length;
 		i = i % menuSounds.Length;
 
 		audio.PlayOneShot(menuSounds[i]);

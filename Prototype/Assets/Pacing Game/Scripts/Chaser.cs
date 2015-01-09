@@ -68,5 +68,15 @@ public class Chaser : MonoBehaviour
 		to = v;
 		toAngle = a;
 	}
+
+	public void SetNewMiddleLine(MiddleLine m)
+	{
+		middleLine = m;
+	}
+
+	public void SetNewPlayer(GameObject g)
+	{
+		player = g;
+	}
 }
 

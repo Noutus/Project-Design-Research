@@ -34,16 +34,11 @@ public class MiddleLine : MonoBehaviour
 	// Howmany points there are in a curve. Adding more will increase the track's length.
 	private static int pointsPerCurve = 20;
 
-	private GameObject chaser;
-	public GameObject chaserPrefab;
-
 	void Awake()
 	{
 		trackObjects = new List<GameObject>();
 
 		points = new MiddlePoint[(curveAngles.Length - 1) * pointsPerCurve];
-
-		chaser = GameObject.Instantiate(chaserPrefab) as GameObject;
 	}
 
 	void Start()
@@ -54,6 +49,9 @@ public class MiddleLine : MonoBehaviour
 			MusicPosition m;
 			if (m = go.GetComponent<MusicPosition>()) m.middleLine = this;
 		}
+
+		
+		Chaser.Instance.SetNewMiddleLine(this);
 	}
 
 	// Creates the track according to the curveAngles array. The track is saved in the points array.
@@ -97,16 +95,27 @@ public class MiddleLine : MonoBehaviour
 	// Shows the track in the scene.
 	private void DrawTrack()
 	{
-		foreach (MiddlePoint m in points)
+		for (int i = 0; i < points.Length; i++)
 		{
 			//create the line
 			//GameObject middle = GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle)) as GameObject;
 
+			MiddlePoint m = points[i];
+			MiddlePoint p;
+			if (i > 0) p = points[i - 1];
+			else p = m;
+
+			bool turnRight = false;
+			float deltaAngle = p.Angle - m.Angle;
+			if (deltaAngle < 0) turnRight = true;
+
 			//create the right and left wall or every object
 			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 5, Quaternion.Euler(0, 0, m.Angle));
-			left.transform.localScale = new Vector3(1, Mathf.Cos(m.Angle * Mathf.Deg2Rad) * 3, 1);
+			if (turnRight) left.transform.localScale = new Vector3(1, Mathf.Sin((deltaAngle + 90) * Mathf.Deg2Rad) * 3, 1);
+			else left.transform.localScale = new Vector3(1, Mathf.Cos(deltaAngle * Mathf.Deg2Rad) * 3, 1);
 			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 5, Quaternion.Euler(0, 0, m.Angle));
-			right.transform.localScale = new Vector3(1, 5, 1);
+			if (turnRight) right.transform.localScale = new Vector3(1, Mathf.Sin((deltaAngle + 90) * Mathf.Deg2Rad) * 3, 1);
+			else right.transform.localScale = new Vector3(1, Mathf.Cos(deltaAngle * Mathf.Deg2Rad) * 3, 1);
 
 			//trackObjects.Add(middle);
 			trackObjects.Add(left);
@@ -187,6 +196,7 @@ public class MiddleLine : MonoBehaviour
 	{
 		int i = 0;
 		if (s == "Last") i = points.Length - 201;
+
 		return points[i];
 	}
 

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FollowPlayer : MonoBehaviour
 {
-	private GameObject player;
+	public GameObject player;
 
 	void Start()
 	{
@@ -12,6 +12,21 @@ public class FollowPlayer : MonoBehaviour
 
 	void Update()
 	{
-		transform.position = player.transform.position;
+		if (player != null)
+		{
+			transform.position = player.transform.position;
+			transform.rotation = player.transform.rotation;
+		}
+
+		else
+		{
+			transform.position = Vector3.zero;
+			transform.rotation = Quaternion.identity;
+		}
+	}
+
+	public void SetPlayer(GameObject g)
+	{
+		player = g;
 	}
 }

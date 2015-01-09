@@ -26,8 +26,6 @@ public class ChaserMovement : MonoBehaviour
 
 	public void increaseIndex()
 	{
-		Debug.Log("Moving Closer");
-
 		int i= index + 3;
 		for(; index < i ;index++)
 		{
@@ -39,9 +37,7 @@ public class ChaserMovement : MonoBehaviour
 
 	public void decreaseIndex()
 	{
-		Debug.Log("Moving Away");
-
-		int i= index - 3;
+		int i= index - 10;
 		for(; index > i ;index--)
 		{
 			int j = index;
@@ -63,7 +59,7 @@ public class ChaserMovement : MonoBehaviour
 		if (index < 0) index = 0;
 		if (index >= points.Length) index = points.Length;
 
-		points [index].Counted=true;
+		points[index].Counted=true;
 
 		MiddlePoint point = GetComponent<MiddleLine>().ClosestPoint(player);
 

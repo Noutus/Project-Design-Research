@@ -7,8 +7,6 @@ public class DestroyOnAudioEnd : MonoBehaviour
 
 	void Awake()
 	{
-		Debug.Log("Create Success Collect");
-
 		elapsedTime = 0;
 	}
 

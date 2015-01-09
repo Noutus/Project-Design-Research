@@ -53,6 +53,7 @@ public class PacingFinish : MonoBehaviour
 		track.Unload();
 		
 		// Load new level
+		index++;
 		LoadLevel(index);
 	}
 
