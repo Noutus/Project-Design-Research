@@ -95,7 +95,7 @@ public class MiddleLine : MonoBehaviour
 		foreach (MiddlePoint m in points)
 		{
 			//create the line
-			GameObject middle = GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle)) as GameObject;
+			//GameObject middle = GameObject.Instantiate(pointPrefab, m.Position, Quaternion.Euler(0, 0, m.Angle)) as GameObject;
 
 			//create the right and left wall or every object
 			GameObject left = (GameObject) GameObject.Instantiate(wallPrefab, m.Position + Vector2Helper.AngleToVector3(m.Angle + 90) * 5, Quaternion.Euler(0, 0, m.Angle));
@@ -103,7 +103,7 @@ public class MiddleLine : MonoBehaviour
 			GameObject right=(GameObject) GameObject.Instantiate(wallPrefab,m.Position + Vector2Helper.AngleToVector3(m.Angle - 90) * 5, Quaternion.Euler(0, 0, m.Angle));
 			right.transform.localScale = new Vector3(1, 5, 1);
 
-			trackObjects.Add(middle);
+			//trackObjects.Add(middle);
 			trackObjects.Add(left);
 			trackObjects.Add(right);
 		}

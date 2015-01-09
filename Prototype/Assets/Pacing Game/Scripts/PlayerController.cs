@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 		{
 			if (S_instance == null)
 			{
-				Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerController)));
 				S_instance = (PlayerController) GameObject.FindGameObjectWithTag("Player").GetComponent(typeof(PlayerController));
 			}
 
