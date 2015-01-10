@@ -4,9 +4,9 @@ using System.Collections;
 public class CollectableScript : MonoBehaviour {
 
 	public GameObject prefab;
+	public GameObject prefab2;
 
-
-
+	public AudioClip[] sounds;
 	// Use this for initialization
 	void Start ()
 	{
@@ -31,10 +31,23 @@ public class CollectableScript : MonoBehaviour {
 				GameObject.Instantiate(prefab);
 			}
 
-			else Debug.Log("Collectable Fail");
+			else
+			{
+				Debug.Log("Collectable Fail");
+
+				GameObject.Instantiate(prefab2);
+			}
 
 			CollectableController.Instance.RemoveCollectable(gameObject);
 			Destroy(gameObject);
 		}
+	}
+
+	public void SetHeight(int i, float time)
+	{
+		audio.Stop();
+		audio.clip = sounds[i];
+		audio.time = time;
+		audio.Play();
 	}
 }

@@ -47,14 +47,19 @@ public class PacingFinish : MonoBehaviour
 		MusicTracker.instance.endLevel = true;
 	}
 
-	public void NewLevel()
+	public void NewLevel(bool next)
 	{
 		// Unload old level
-		track.Unload();
+		if (track != null) track.Unload();
 		
 		// Load new level
-		index++;
+		if (next) index++;
 		LoadLevel(index);
+	}
+
+	public void EndLevel()
+	{
+		if (track != null) track.Unload();
 	}
 
 	public void LoadLevel(int i)

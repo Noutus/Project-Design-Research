@@ -42,4 +42,12 @@ public class CollectableController : MonoBehaviour
 			if (g != null) g.audio.time = t;
 		}
 	}
+
+	public void SetHeight(int i, float time)
+	{
+		foreach (GameObject g in collectables)
+		{
+			if (g != null) g.GetComponent<CollectableScript>().SetHeight(i, time);
+		}
+	}
 }

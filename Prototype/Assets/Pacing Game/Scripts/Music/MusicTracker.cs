@@ -25,6 +25,7 @@ public class MusicTracker : MonoBehaviour
 		Phase,
 		LastPhase,
 		Transition,
+		Gameover,
 	}
 
 	public GameObject[] musicSystemPrefabs;
@@ -45,6 +46,7 @@ public class MusicTracker : MonoBehaviour
 	public int PhaseIndex { get { return phaseIndex; }}
 
 	public bool endLevel = false;
+	public bool gameOver = false;
 
 	private float timeSinceLastStateSwitch = 0;
 
@@ -101,14 +103,30 @@ public class MusicTracker : MonoBehaviour
 			if (timeSinceLastStateSwitch > 13.124)
 			{
 				SwitchState(MusicState.Phase);
-				PacingFinish.instance.NewLevel();
+				PacingFinish.instance.NewLevel(true);
+			}
+			break;
+		case MusicState.Gameover:
+			gameOver = false;
+			if (timeSinceLastStateSwitch > 3.750)
+			{
+				SoundMenu.Instance.ReturnToMenu();
 			}
 			break;
 		}
 
 		if (timeSinceLastStateSwitch % 1.875 < Time.deltaTime)
 		{
-			ObstacleController.Instance.StartObstacle((float)(timeSinceLastStateSwitch % 1.875));
+			if (gameOver)
+			{
+				gameOver = false;
+				SwitchState(MusicState.Gameover);
+			}
+
+			else
+			{
+				ObstacleController.Instance.StartObstacle((float)(timeSinceLastStateSwitch % 1.875));
+			}
 		}
 
 		timeSinceLastStateSwitch += Time.deltaTime;
@@ -153,6 +171,7 @@ public class MusicTracker : MonoBehaviour
 
 		systemIndex = i;
 
+		CollectableController.Instance.SetHeight(i, musicTime);
 		PacingSystem p = GameObject.FindGameObjectWithTag("Player").GetComponent<PacingSystem>();
 		p.Instruments = ActiveSystem;
 

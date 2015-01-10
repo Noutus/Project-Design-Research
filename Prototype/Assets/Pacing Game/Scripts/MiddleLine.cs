@@ -213,6 +213,8 @@ public class MiddleLine : MonoBehaviour
 			Destroy(g);
 		}
 
+		MusicTracker.instance.StopMusic();
+
 		trackObjects.Clear();
 
 		Destroy(gameObject);

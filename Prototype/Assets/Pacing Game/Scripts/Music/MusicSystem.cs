@@ -7,6 +7,7 @@ public class MusicSystem : MonoBehaviour
 	public AudioClip[] phases;
 	public AudioClip lastPhase;
 	public AudioClip transition;
+	public AudioClip gameover;
 
 	public GameObject badMusicPrefab;
 	public GameObject badMusic;
@@ -47,6 +48,10 @@ public class MusicSystem : MonoBehaviour
 			break;
 		case MusicTracker.MusicState.Transition:
 			audio.clip = transition;
+			badMusic.audio.Stop();
+			break;
+		case MusicTracker.MusicState.Gameover:
+			audio.clip = gameover;
 			badMusic.audio.Stop();
 			break;
 		}

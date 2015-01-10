@@ -4,6 +4,20 @@ using System.Collections.Generic;
 
 public class SoundMenu : MonoBehaviour
 {
+	private static SoundMenu S_instance;
+	public static SoundMenu Instance
+	{
+		get
+		{
+			if (S_instance == null)
+			{
+				S_instance = GameObject.Find("Menu").GetComponent<SoundMenu>();
+			}
+
+			return S_instance;
+		}
+	}
+
 	public AudioClip[] menuSounds;  
 
 	public int[] menuReferences;
@@ -27,10 +41,10 @@ public class SoundMenu : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Return) || Input.GetAxis("Fire1") > 0.2) SelectMenuItem(index);
 
-			if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0.2) upPressed = true;
-			if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < -0.2) downPressed = true;
-			if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetAxis("Vertical") < 0.2) upPressed = false;
-			if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetAxis("Vertical") > -0.2) downPressed = false;
+			if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.2) upPressed = true;
+			if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.2) downPressed = true;
+			if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") < 0.2) upPressed = false;
+			if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") > -0.2) downPressed = false;
 
 			if (!audio.isPlaying && keyDelay > keyDelayMax)
 			{
@@ -39,6 +53,11 @@ public class SoundMenu : MonoBehaviour
 			}
 
 			keyDelay += Time.deltaTime;
+		}
+
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			ReturnToMenu();
 		}
 	}
 
@@ -50,7 +69,8 @@ public class SoundMenu : MonoBehaviour
 		MusicGlobals.instance.Level = menuReferences[i];
 
 		finishLine.GetComponent<PacingFinish>().Initialize();
-
+		
+		if (Camera.main != null) Camera.main.transform.position = Vector3.forward * -10;
 		activeMenu = false;
 	}
 
@@ -62,5 +82,12 @@ public class SoundMenu : MonoBehaviour
 		audio.PlayOneShot(menuSounds[i]);
 
 		keyDelay = 0;
+	}
+
+	public void ReturnToMenu()
+	{
+		activeMenu = true;
+		if (Camera.main != null) Camera.main.transform.position = Vector3.forward * 40;
+		PacingFinish.instance.EndLevel();
 	}
 }

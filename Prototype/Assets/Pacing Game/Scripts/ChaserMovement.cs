@@ -73,7 +73,7 @@ public class ChaserMovement : MonoBehaviour
 
 		if (point.Counted)
 		{
-			//Debug.Log("THE PLAYER HAS LOST");
+			MusicTracker.instance.gameOver = true;
 		}
 
 		else if ((i - 5) > 0 && points[i - 5].Counted)
