@@ -33,8 +33,8 @@ public class PacingSystem : MonoBehaviour
 			
 			foreach (GameObject e in instruments)
 			{
-				AudioSource music=e.GetComponent<AudioSource>();
-				float parameter=e.GetComponent<MusicParameters>().parameter;
+				AudioSource music = e.GetComponent<AudioSource>();
+				float parameter = e.GetComponent<MusicParameters>().parameter;
 				float parameter2 = e.GetComponent<MusicParameters>().parameter2;
 
 				//first we check the "good" instruments
@@ -51,7 +51,7 @@ public class PacingSystem : MonoBehaviour
 					if (angle < parameter) music.volume = 0;
 					else if (angle > parameter2) music.volume = 1;
 					else music.volume = 1 / (parameter2 - parameter) * (angle - parameter);
-				}	
+				}
 			}
 		}
 	}

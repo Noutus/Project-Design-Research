@@ -25,6 +25,7 @@ public class ObstacleScript : MonoBehaviour
 		audio.playOnAwake = false;
 		audio.clip = startSong;
 		audio.Play();
+
 		Invoke ("jumpingPlayer",audio.clip.length);
 	}
 
@@ -32,10 +33,7 @@ public class ObstacleScript : MonoBehaviour
 	{
 		transform.position = player.transform.position;
 
-		if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1") > 0.2f)
-		{
-			pressed = true;
-		}
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1") > 0.2f) pressed = true;
 	}
 
 	void jumpingPlayer()

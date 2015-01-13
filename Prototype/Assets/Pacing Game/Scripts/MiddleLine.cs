@@ -50,7 +50,7 @@ public class MiddleLine : MonoBehaviour
 			if (m = go.GetComponent<MusicPosition>()) m.middleLine = this;
 		}
 
-		
+		MusicTracker.instance.StartMusic();
 		Chaser.Instance.SetNewMiddleLine(this);
 	}
 

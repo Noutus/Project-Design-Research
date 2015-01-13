@@ -39,6 +39,11 @@ public class SoundMenu : MonoBehaviour
 	{
 		if (activeMenu)
 		{
+			if (Input.GetKeyDown(KeyCode.Alpha1)) MusicGlobals.instance.Level = 0;
+		    if (Input.GetKeyDown(KeyCode.Alpha2)) MusicGlobals.instance.Level = 1;
+		    if (Input.GetKeyDown(KeyCode.Alpha3)) MusicGlobals.instance.Level = 2;
+		    if (Input.GetKeyDown(KeyCode.Alpha4)) MusicGlobals.instance.Level = 3;
+
 			if (Input.GetKeyDown(KeyCode.Return) || Input.GetAxis("Fire1") > 0.2) SelectMenuItem(index);
 
 			if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxis("Vertical") > 0.2) upPressed = true;
@@ -55,9 +60,10 @@ public class SoundMenu : MonoBehaviour
 			keyDelay += Time.deltaTime;
 		}
 
-		if (Input.GetKey(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) || Input.GetAxis("Back") > 0.2)
 		{
-			ReturnToMenu();
+			if (activeMenu) Application.Quit();
+			else ReturnToMenu();
 		}
 	}
 
@@ -66,7 +72,9 @@ public class SoundMenu : MonoBehaviour
 		if (i < 0) i += menuSounds.Length;
 		i = i % menuSounds.Length;
 
-		MusicGlobals.instance.Level = menuReferences[i];
+		MenuBackgroundMusic.Instance.ToggleMusic(false);
+
+		//MusicGlobals.instance.Level = menuReferences[i];
 
 		finishLine.GetComponent<PacingFinish>().Initialize();
 		
@@ -86,6 +94,9 @@ public class SoundMenu : MonoBehaviour
 
 	public void ReturnToMenu()
 	{
+		PlayerController.Instance.ResetPosition();
+		MenuBackgroundMusic.Instance.ToggleMusic(true);
+
 		activeMenu = true;
 		if (Camera.main != null) Camera.main.transform.position = Vector3.forward * 40;
 		PacingFinish.instance.EndLevel();

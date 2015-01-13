@@ -54,6 +54,7 @@
      <Compile Include="Assets\Pacing Game\Scripts\Controllers\ObstacleController.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\DestroyOnAudioEnd.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\FollowPlayer.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Menu\MenuBackgroundMusic.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\MusicGlobals.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\MusicSave.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Menu\SoundMenu.cs" />
@@ -66,7 +67,6 @@
      <Compile Include="Assets\Pacing Game\Scripts\MusicParameters.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MusicPosition.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\ObstacleScript.cs" />
-     <Compile Include="Assets\Pacing Game\Scripts\PacingMovement.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\PacingSystem.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Track\PacingFinish.cs" />

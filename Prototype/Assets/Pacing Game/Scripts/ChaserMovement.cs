@@ -3,31 +3,43 @@ using System.Collections;
 
 public class ChaserMovement : MonoBehaviour
 {
-
-	private int index;
-	public GameObject player;
 	public MiddlePoint[] points;
+
+	public GameObject player;
+
 	public float timeDelayed;
 	public float moveInterval;
 
-	void Start()
+	private int index;
+
+	public bool started = false;
+
+	void Awake()
 	{
 		index = 0;
+	}
+
+	void Start()
+	{
 		player = GameObject.FindGameObjectWithTag("Player");
 
 		points = GetComponent<MiddleLine>().points;
-		StartCoroutine(StartMoving());
 	}
-
+	
 	void Update()
 	{
 		Chaser.Instance.SetTo(points[index].Position, points[index].Angle);
 	}
 
+	public void StartMove()
+	{
+		started = true;
+		StartCoroutine(StartMoving());
+	}
+
 	public void increaseIndex()
 	{
-		int i= index + 3;
-		for(; index < i ;index++)
+		for (int i = index + 3; index < i ;index++)
 		{
 			int j = index;
 			if (j >= points.Length) j = points.Length - 1;
@@ -59,7 +71,7 @@ public class ChaserMovement : MonoBehaviour
 		if (index < 0) index = 0;
 		if (index >= points.Length) index = points.Length;
 
-		points[index].Counted=true;
+		points[index].Counted = true;
 
 		MiddlePoint point = GetComponent<MiddleLine>().ClosestPoint(player);
 
@@ -71,25 +83,10 @@ public class ChaserMovement : MonoBehaviour
 			else i++;
 		}
 
-		if (point.Counted)
-		{
-			MusicTracker.instance.gameOver = true;
-		}
-
-		else if ((i - 5) > 0 && points[i - 5].Counted)
-		{
-			MusicTracker.instance.SwitchTempo(2);
-		}
-
-		else if ((i - 10) > 0 && points[i - 10].Counted)
-		{
-			MusicTracker.instance.SwitchTempo(1);
-		}
-
-		else
-		{
-			MusicTracker.instance.SwitchTempo(0);
-		}
+		if (point.Counted) MusicTracker.instance.gameOver = true;
+		else if ((i - 5) > 0 && points[i - 5].Counted) MusicTracker.instance.SwitchTempo(2);
+		else if ((i - 10) > 0 && points[i - 10].Counted) MusicTracker.instance.SwitchTempo(1);
+		else MusicTracker.instance.SwitchTempo(0);
 
 		index++;
 

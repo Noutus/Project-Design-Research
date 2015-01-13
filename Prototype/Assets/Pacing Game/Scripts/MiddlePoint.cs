@@ -16,7 +16,8 @@ public class MiddlePoint
 		set { angle = value; }
 	}
 	private bool counted;
-	public bool Counted{
+	public bool Counted
+	{
 		get { return counted; }
 		set { counted = value; }
 	}

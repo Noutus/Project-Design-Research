@@ -110,6 +110,7 @@ public class MusicTracker : MonoBehaviour
 			gameOver = false;
 			if (timeSinceLastStateSwitch > 3.750)
 			{
+				state = MusicState.Idle;
 				SoundMenu.Instance.ReturnToMenu();
 			}
 			break;

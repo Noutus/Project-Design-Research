@@ -3,6 +3,20 @@ using System.Collections;
 
 public class Chaser : MonoBehaviour
 {
+	private static Chaser S_instance;
+	public static Chaser Instance
+	{
+		get
+		{
+			if (S_instance == null)
+			{
+				S_instance = GameObject.FindGameObjectWithTag("Chaser").GetComponent<Chaser>();
+			}
+			
+			return S_instance;
+		}
+	}
+
 	public GameObject player;
 	public MiddleLine middleLine;
 	
@@ -15,20 +29,6 @@ public class Chaser : MonoBehaviour
 	private float previousToAngle;
 
 	private float lerpTime;
-
-	private static Chaser S_instance;
-	public static Chaser Instance
-	{
-		get
-		{
-			if (S_instance == null)
-			{
-				S_instance = GameObject.FindGameObjectWithTag("Chaser").GetComponent<Chaser>();
-			}
-
-			return S_instance;
-		}
-	}
 
 	void Start()
 	{

@@ -117,11 +117,25 @@ public class PlayerController : MonoBehaviour
 				transform.Rotate (Vector3.forward, -maxTurn * Time.deltaTime);
 			}
 
+			if (upPressed)
+			{
+				ChaserMovement c = middleLine.GetComponent<ChaserMovement>();
+				if (c != null && !c.started)
+				{
+					c.StartMove();
+				}
+			}
+
 			upPressed = leftPressed = rightPressed = false;
 
 			if ( moveCooldown > 0) moveCooldown -= Time.deltaTime;
 			if (!jumpAllowed && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0.2f)) moveCooldown = 0.5f;
 		}
+	}
+
+	public void ResetPosition()
+	{
+		transform.position = Vector3.zero;
 	}
 
 	public void SetTrack(GameObject g)

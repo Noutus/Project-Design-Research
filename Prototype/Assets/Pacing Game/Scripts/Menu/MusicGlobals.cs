@@ -20,7 +20,7 @@ public class MusicGlobals : MonoBehaviour
 			{
 				GameObject go = new GameObject("MusicGlobals");
 				s_Instance = (MusicGlobals) go.AddComponent(typeof(MusicGlobals));
-				s_Instance.LoadGame();
+				//s_Instance.LoadGame();
 			}
 
 			return s_Instance;
