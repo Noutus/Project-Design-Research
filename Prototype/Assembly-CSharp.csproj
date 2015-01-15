@@ -62,6 +62,7 @@
      <Compile Include="Assets\Pacing Game\Scripts\MiddleLine.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MiddlePoint.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Music\BadSystem.cs" />
+     <Compile Include="Assets\Pacing Game\Scripts\Music\DestroyOnPlayerMove.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Music\MusicSystem.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\Music\MusicTracker.cs" />
      <Compile Include="Assets\Pacing Game\Scripts\MusicParameters.cs" />

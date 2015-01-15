@@ -14,6 +14,8 @@ public class ObstacleScript : MonoBehaviour
 
 	public AudioClip startSong,goodResult,badResult;
 
+	public Sprite badSprite, goodSprite;
+
 	private bool pressed = false;
 
 	void Start()
@@ -40,6 +42,8 @@ public class ObstacleScript : MonoBehaviour
 	{
 		PlayerController.Instance.jumpAllowed = false;
 
+		SpriteRenderer s = GetComponent<SpriteRenderer>();
+
 		//then we decide which music to play
 		if (!pressed)
 		{
@@ -47,6 +51,7 @@ public class ObstacleScript : MonoBehaviour
 			audio.clip = badResult;
 			audio.Play();
 			GameObject.FindGameObjectWithTag ("MiddleLine").GetComponent<ChaserMovement>().increaseIndex ();
+			s.sprite = badSprite;
 		}
 
 		else
@@ -54,7 +59,7 @@ public class ObstacleScript : MonoBehaviour
 			Debug.Log("Obstacle Success");
 			audio.clip = goodResult;
 			audio.Play();
-
+			s.sprite = goodSprite;
 		}
 
 		GameObject.Destroy (gameObject,audio.clip.length);
